@@ -7,9 +7,9 @@
 
 ## About
 
-The aim of this package is to provide access to the [OpenAIRE API](http://api.openaire.eu/). [OpenAIRE](https://www.openaire.eu/) provides access to grant-supported research publications and datasets. 
+`ropensci` gives access to the [OpenAIRE API](http://api.openaire.eu/)with R. The [OpenAIRE](https://www.openaire.eu/) project facilitates Open Access repository interoperability and supports Open Access funder mandates (e.g. European Commission).
 
-This package is in early developement and I am happy for contributors who wish to help me finalizing the wrapper.
+This package is in early development and I am happy for contributors who wish to help me finalizing the wrapper.
 
 ## Installation from GitHub
 
