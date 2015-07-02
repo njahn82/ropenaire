@@ -1,0 +1,71 @@
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+# ropenaire
+
+[![Build Status](https://travis-ci.org/njahn82/ropenaire.svg?branch=master)](https://travis-ci.org/njahn82/ropenaire)
+[![codecov.io](http://codecov.io/github/njahn82/ropenaire/coverage.svg?branch=master)](http://codecov.io/github/njahn82/ropenaire?branch=master)
+
+## About
+
+The aim of this package is to provide access to the [OpenAIRE API](http://api.openaire.eu/). [OpenAIRE](https://www.openaire.eu/) provides access to grant-supported research publications and datasets. 
+
+This package is in early developement and I am happy for contributors who wish to help me finalizing the wrapper.
+
+## Installation from GitHub
+
+```{r, eval=FALSE}
+devtools::install_github("njahn82/ropenaire")
+```
+
+Load `ropenaire`
+
+```{r}
+library(ropenaire)
+```
+
+## Usage 
+
+### Search for EC-funded projects by participant institutions
+
+by acronym
+
+```{r}
+roa_projects(org = "UGOE")
+```
+ 
+### Search for FP7 grant-supported publications
+
+```{r}
+my_pubs <- roa_pubs(fp7 = "283595")
+```
+
+### Show how many of them are Open Access 
+
+```{r}
+table(my_pubs$Access)
+```
+
+## Get all the FP7-supported publications from projects an institution participates in
+
+```{r}
+ugoe <- roa_projects(org = "UGOE")
+tt <- plyr::ldply(as.character(ugoe$grantID), roa_pubs)
+
+head(tt)
+
+table(tt$Access)
+```
+
+## Meta
+
+* Please [report any issues or bugs](https://github.com/njahn82/ropenaire/issues).
+* License: MIT
+
+

@@ -1,0 +1,13 @@
+.RData
+.Rhistory
+.gitignore
+.travis.yml
+..Rcheck
+.Rproj.user
+.git
+^CONDUCT\.md$
+^README\.Rmd$
+^README-.*\.png$
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.travis\.yml$
