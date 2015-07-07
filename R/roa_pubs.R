@@ -15,6 +15,6 @@ roa_pubs <- function(fp7 = NULL, limit = 1000, ...){
                size = limit,
                format = "tsv", ...)
   tt_GET(path = "search/publications", query = args) %>%
-    content %>%
+    content(quote = "") %>%
     tbl_df
 }
