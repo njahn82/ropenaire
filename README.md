@@ -65,8 +65,8 @@ my_pubs <- roa_pubs(fp7 = "283595")
 ```r
 table(my_pubs$Access)
 #> 
-#>       OPEN RESTRICTED 
-#>         61          9
+#>       "OPEN" "RESTRICTED" 
+#>           61            9
 ```
 
 ## Get all the FP7-supported publications from projects an institution participates in
@@ -77,53 +77,53 @@ ugoe <- roa_projects(org = "UGOE")
 tt <- plyr::ldply(as.character(ugoe$grantID), roa_pubs)
 
 head(tt)
-#>                                                                                                                      Title
-#> 1              A laser-lock concept to reach cm/s-precision in Doppler experiments with Fabry-Perot wavelength calibrators
-#> 2 An independent planet search in the Kepler dataset II. An extremely low-density super-Earth mass planet around Kepler-87
-#> 3                           Flat-relative optimal extraction. A quick and efficient algorithm for stabilised spectrographs
-#> 4                                                                          Radial velocity signatures of Zeeman broadening
-#> 5                                                                           Distribution of mass of holomorphic cusp forms
-#> 6                                                               Drinfeld modules, Frobenius endomorphisms, and CM-liftings
-#>                                                                                                                                          Authors
-#> 1                                                                                                       Reiners, A. Banyal, R. K. Ulbrich, R. G.
-#> 2                                                                            Dreizler, Stefan Zechmeister, Mathias Husser, Tim-oliver Ofir, Aviv
-#> 3                                                                                                  Reiners, A. Anglada-escudé, G. Zechmeister, M.
-#> 4 Jeffers, Sandra V. Morin, Julien Kochukhov, Oleg Reiners, Ansgar Piskunov, Nikolai Anglada-escude, Guillem Shulyak, Denis Zechmeister, Mathias
-#> 5                                                                                                 Khan, Rizwanur Blomer, Valentin Young, Matthew
-#> 6                                                                                                        Cojocaru, Alina Carmen Papikian, Mihran
-#>   Publication.Year                         DOI
-#> 1       2014-08-26                            
-#> 2       2014-01-01 10.1051/0004-6361/201220935
-#> 3       2013-11-20 10.1051/0004-6361/201322746
-#> 4       2013-01-01 10.1051/0004-6361/201220437
-#> 5       2012-03-12    10.1215/00127094-2380967
-#> 6       2013-07-23                            
-#>                             Permanent.identifier Publication.type
-#> 1                 http://arxiv.org/abs/1408.6111          Article
-#> 2                 http://arxiv.org/abs/1310.2064          Article
-#> 3  http://dx.doi.org/10.1051/0004-6361/201322746          Article
-#> 4                 http://arxiv.org/abs/1301.2951          Article
-#> 5 http://projecteuclid.org/euclid.dmj/1383760700          Article
-#> 6                 http://arxiv.org/abs/1307.6162          Article
-#>                                       Journal     Project.Name..GA.Number.
-#> 1                                        <NA> WAVELENGTH STANDARDS(279347)
-#> 2                                        <NA> WAVELENGTH STANDARDS(279347)
-#> 3                                        <NA> WAVELENGTH STANDARDS(279347)
-#> 4                                        <NA> WAVELENGTH STANDARDS(279347)
-#> 5 Duke Math. J. 162, no. 14 (2013), 2609-2644               ANTHOS(258713)
-#> 6                                                           ANTHOS(258713)
-#>   Access
-#> 1   OPEN
-#> 2   OPEN
-#> 3   OPEN
-#> 4   OPEN
-#> 5   OPEN
-#> 6   OPEN
+#>                                                                                                                        Title
+#> 1              "A laser-lock concept to reach cm/s-precision in Doppler experiments with Fabry-Perot wavelength calibrators"
+#> 2 "An independent planet search in the Kepler dataset II. An extremely low-density super-Earth mass planet around Kepler-87"
+#> 3                           "Flat-relative optimal extraction. A quick and efficient algorithm for stabilised spectrographs"
+#> 4                                                                          "Radial velocity signatures of Zeeman broadening"
+#> 5                                                                           "Distribution of mass of holomorphic cusp forms"
+#> 6                                                               "Drinfeld modules, Frobenius endomorphisms, and CM-liftings"
+#>                                                                                                                                            Authors
+#> 1                                                                                                       "Reiners, A. Banyal, R. K. Ulbrich, R. G."
+#> 2                                                                            "Dreizler, Stefan Zechmeister, Mathias Husser, Tim-oliver Ofir, Aviv"
+#> 3                                                                                                  "Reiners, A. Anglada-escudé, G. Zechmeister, M."
+#> 4 "Jeffers, Sandra V. Morin, Julien Kochukhov, Oleg Reiners, Ansgar Piskunov, Nikolai Anglada-escude, Guillem Shulyak, Denis Zechmeister, Mathias"
+#> 5                                                                                                 "Khan, Rizwanur Blomer, Valentin Young, Matthew"
+#> 6                                                                                                        "Cojocaru, Alina Carmen Papikian, Mihran"
+#>   Publication.Year                           DOI
+#> 1     "2014-08-26"                              
+#> 2     "2014-01-01" "10.1051/0004-6361/201220935"
+#> 3     "2013-11-20" "10.1051/0004-6361/201322746"
+#> 4     "2013-01-01" "10.1051/0004-6361/201220437"
+#> 5     "2012-03-12"    "10.1215/00127094-2380967"
+#> 6     "2013-07-23"                              
+#>                               Permanent.identifier Publication.type
+#> 1                 "http://arxiv.org/abs/1408.6111"        "Article"
+#> 2                 "http://arxiv.org/abs/1310.2064"        "Article"
+#> 3  "http://dx.doi.org/10.1051/0004-6361/201322746"        "Article"
+#> 4                 "http://arxiv.org/abs/1301.2951"        "Article"
+#> 5 "http://projecteuclid.org/euclid.dmj/1383760700"        "Article"
+#> 6                 "http://arxiv.org/abs/1307.6162"        "Article"
+#>                                         Journal
+#> 1                                            ""
+#> 2                                            ""
+#> 3                                            ""
+#> 4                                            ""
+#> 5 "Duke Math. J. 162, no. 14 (2013), 2609-2644"
+#> 6                                            ""
+#>         Project.Name..GA.Number. Access
+#> 1 "WAVELENGTH STANDARDS(279347)" "OPEN"
+#> 2 "WAVELENGTH STANDARDS(279347)" "OPEN"
+#> 3 "WAVELENGTH STANDARDS(279347)" "OPEN"
+#> 4 "WAVELENGTH STANDARDS(279347)" "OPEN"
+#> 5               "ANTHOS(258713)" "OPEN"
+#> 6               "ANTHOS(258713)" "OPEN"
 
 table(tt$Access)
 #> 
-#>                CLOSED       OPEN RESTRICTED 
-#>          1        357        902         38
+#>     "CLOSED"       "OPEN" "RESTRICTED" 
+#>          416          918           38
 ```
 
 ## Meta
