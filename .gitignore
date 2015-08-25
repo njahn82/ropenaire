@@ -3,3 +3,4 @@
 .Rhistory
 .RData
 *.tar.gz
+.DS_Store

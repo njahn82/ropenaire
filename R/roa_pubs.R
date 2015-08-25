@@ -4,8 +4,8 @@
 #' @param limit limit number of records
 #' @param doi Gets the publications with the given DOIs
 #' @param id Gets the publication with the given openaire identifier, if any.
-#' @param fromDateAccepted Gets the publications whose date of acceptance is greater than or equal the given date. Allowed values: date formatted as YYYY-MM-DD.
-#' @param toDateAccepted Gets the publications whose date of acceptance is less than or equal the given date. Allowed values: date formatted as YYYY-MM-DD.
+#' @param from_date Gets the publications whose date of acceptance is greater than or equal the given date. Allowed values: date formatted as YYYY-MM-DD.
+#' @param to_date Gets the publications whose date of acceptance is less than or equal the given date. Allowed values: date formatted as YYYY-MM-DD.
 #' @param title Publication title
 #' @param author Search for publications by authors
 #'
@@ -14,7 +14,7 @@
 #' @export
 #' @import httr
 #' @import dplyr
-#' @example \dontrun{
+#' @examples \dontrun{
 #' # Search for FP7 grant-supported publications
 #' my_pubs <- roa_pubs(fp7 = "283595")
 #' Show how many of them are Open Access
@@ -41,11 +41,11 @@ roa_pubs <-
       content(quote = "")
     if (nrow(out) == 0)
       NULL
-    fixes(out)
+    fixes(out) %>%
+      tbl_df
   }
 
 fixes <- function(x) {
-  apply(x, 2, function(y)
-    gsub('\"', '', y)) %>%
-    data.frame(., stringsAsFactors = FALSE)
+ tt <- apply(x, 2, function(y) gsub('\"', '', y))
+ data.frame(tt, stringsAsFactors = FALSE)
 }

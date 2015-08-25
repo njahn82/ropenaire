@@ -4,16 +4,40 @@
 \alias{roa_pubs}
 \title{Search FP7 publications}
 \usage{
-roa_pubs(fp7 = NULL, limit = 1000, ...)
+roa_pubs(fp7 = NULL, limit = 1000, id = NULL, doi = NULL,
+  title = NULL, author = NULL, from_date = NULL, to_date = NULL, ...)
 }
 \arguments{
 \item{fp7}{Search for publications associated to a FP7 project with the given grant number}
 
 \item{limit}{limit number of records}
 
+\item{id}{Gets the publication with the given openaire identifier, if any.}
+
+\item{doi}{Gets the publications with the given DOIs}
+
+\item{title}{Publication title}
+
+\item{author}{Search for publications by authors}
+
+\item{from_date}{Gets the publications whose date of acceptance is greater than or equal the given date. Allowed values: date formatted as YYYY-MM-DD.}
+
+\item{to_date}{Gets the publications whose date of acceptance is less than or equal the given date. Allowed values: date formatted as YYYY-MM-DD.}
+
 \item{...}{other API parameters \url{http://api.openaire.eu/}}
 }
 \description{
 Search FP7 publications
+}
+\examples{
+\dontrun{
+# Search for FP7 grant-supported publications
+my_pubs <- roa_pubs(fp7 = "283595")
+Show how many of them are Open Access
+table(my_pubs$Access)
+
+Search by doi
+roa_pubs(doi = "10.1051/0004-6361/201220935")
+}
 }
 
