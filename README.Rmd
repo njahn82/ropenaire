@@ -15,9 +15,11 @@ knitr::opts_chunk$set(
 
 ## About
 
-`ropensci` gives access to the [OpenAIRE API](http://api.openaire.eu/)with R. The [OpenAIRE](https://www.openaire.eu/) project facilitates Open Access repository interoperability and supports Open Access funder mandates (e.g. European Commission).
+`ropensci` gives access to the [OpenAIRE API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) OpenAIRE is an initiative which aims to support the Open Access policy of the European Commission. So far, OpenAIRE facilitates access to over 11 million publications from various sources such as 5,800 open access repositories.
 
-This package is in early development and I am happy for contributors who wish to help me finalizing the wrapper.
+The API is intended for metadata discovery and exploration only. The number of total return results returned by one query is limited to 10,000.
+
+For bulk access, please use the [OpenAIRE OAI-PMH endpoint](http://api.openaire.eu/#cha_oai_pmh), which can be queried by [Scott's OAI-PMH client](https://github.com/sckott/oai).
 
 ## Installation from GitHub
 
@@ -33,27 +35,46 @@ library(ropenaire)
 
 ## Usage 
 
-### Search for EC-funded projects by participant institutions
+### Projects
 
-by acronym
+Search EC-funded projects by participant institutions
+
+Göttingen University by acronym `GOE`
 
 ```{r}
 roa_projects(org = "UGOE")
 ```
  
-### Search for FP7 grant-supported publications
+### Publications
+
+Publications from the 2nd-Generation Open Access Infrastructure for Research in Europe project, which has the grant id 283595.
 
 ```{r}
 my_pubs <- roa_pubs(fp7 = "283595")
 ```
 
-### Show how many of them are Open Access 
+Show how many of them are Open Access 
 
 ```{r}
 table(my_pubs$Access)
 ```
 
-## Get all the FP7-supported publications from projects an institution participates in
+### Datasets
+
+Search for FP7 grant-supported datasets
+
+```{r}
+roa_datasets(fp7 = "247153")
+```
+
+Search by title keywords
+
+```{r}
+roa_datasets(title = "methane") 
+
+```
+
+### Get all the FP7-supported publications from projects an institution participates in
 
 ```{r}
 ugoe <- roa_projects(org = "UGOE")

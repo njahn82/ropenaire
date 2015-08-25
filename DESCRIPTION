@@ -1,8 +1,8 @@
 Package: ropenaire
 Type: Package
 Title: Search OpenAIRE
-Version: 0.1
-Date: 2015-07-02
+Version: 0.1.1
+Date: 2015-08-25
 Authors@R: person(given = "Najko", family = "Jahn",
     email = "najko.jahn@uni-bielefeld.de", role = c("aut", "cre"))
 Author: Najko Jahn [aut, cre]
@@ -10,7 +10,7 @@ Maintainer: Najko Jahn <najko.jahn@uni-bielefeld.de>
 Description: Client for the OpenAIRE API.
   The API is intended for metadata discovery and exploration only,
   that is it does not give direct access to publication files and it does not provide access
-  to the whole information space: the number of total results returned by one query is limited
+  to the whole information space since the number of total results returned by one query is limited
   to 10,000.
 License: MIT + file LICENSE
 LazyData: TRUE
@@ -19,4 +19,5 @@ Imports:
   XML,
   dplyr
 Suggests:
-  testthat
+  testthat,
+  knitr

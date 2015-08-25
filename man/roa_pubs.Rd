@@ -20,9 +20,11 @@ roa_pubs(fp7 = NULL, limit = 1000, id = NULL, doi = NULL,
 
 \item{author}{Search for publications by authors}
 
-\item{from_date}{Gets the publications whose date of acceptance is greater than or equal the given date. Allowed values: date formatted as YYYY-MM-DD.}
+\item{from_date}{Gets the publications whose date of acceptance is greater than or equal the given date.
+Allowed values: date formatted as YYYY-MM-DD.}
 
-\item{to_date}{Gets the publications whose date of acceptance is less than or equal the given date. Allowed values: date formatted as YYYY-MM-DD.}
+\item{to_date}{Gets the publications whose date of acceptance is less than or equal the given date.
+Allowed values: date formatted as YYYY-MM-DD.}
 
 \item{...}{other API parameters \url{http://api.openaire.eu/}}
 }
