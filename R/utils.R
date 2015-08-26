@@ -16,11 +16,3 @@ tt_check <- function(req) {
     return(invisible())
   stop("HTTP failure: ", req$status_code, "\n", call. = FALSE)
 }
-
-
-# deal with quoting issues in the tsv files that openaire provides
-fixes <- function(x) {
-  tt <- apply(x, 2, function(y)
-    gsub('\"', '', y))
-  data.frame(tt, stringsAsFactors = FALSE)
-}

@@ -4,9 +4,25 @@
 \alias{roa_projects}
 \title{Get EC projects}
 \usage{
-roa_projects(org = NULL, limit = 1000, ...)
+roa_projects(grant_id = NULL, title = NULL, acronym = NULL,
+  call_id = NULL, start_year = NULL, end_year = NULL, country = NULL,
+  org = NULL, limit = 1000, ...)
 }
 \arguments{
+\item{grant_id}{Gets the project with the given grant identifier, if any}
+
+\item{title}{Name of the project}
+
+\item{acronym}{Acronym}
+
+\item{call_id}{Search for projects by call identifier}
+
+\item{start_year}{Gets the projects that started in the given year. Format: YYYY}
+
+\item{end_year}{Gets the projects that ended in the given year. Format: YYYY}
+
+\item{country}{Search for projects by participant countries. Foramt: 2-letter country code}
+
 \item{org}{Search for projects by participant institutions (acronym)}
 
 \item{limit}{number of projects to be returned}
@@ -17,6 +33,10 @@ roa_projects(org = NULL, limit = 1000, ...)
 Get EC projects
 }
 \examples{
+\dontrun{
 roa_projects(org = "UGOE")
+
+roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
+}
 }
 

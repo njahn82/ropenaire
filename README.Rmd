@@ -15,11 +15,11 @@ knitr::opts_chunk$set(
 
 ## About
 
-`ropensci` gives access to the [OpenAIRE API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) OpenAIRE is an initiative which aims to support the Open Access policy of the European Commission. So far, OpenAIRE facilitates access to over 11 million publications from various sources such as 5,800 open access repositories.
+`ropenaire` gives access to the [OpenAIRE RESTful API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) is an open science initiative, which supports the Open Access policy of the European Commission. So far, OpenAIRE facilitates access to over 11 million publications from various sources such as 5,800 open access repositories.
 
 The API is intended for metadata discovery and exploration only. The number of total return results returned by one query is limited to 10,000.
 
-For bulk access, please use the [OpenAIRE OAI-PMH endpoint](http://api.openaire.eu/#cha_oai_pmh), which can be queried by [Scott's OAI-PMH client](https://github.com/sckott/oai).
+For bulk access, please use the [OpenAIRE OAI-PMH endpoint](http://api.openaire.eu/#cha_oai_pmh), which can be queried by [Scott's OAI-PMH client](https://github.com/sckott/oai) or [OAIHarvester](https://cran.r-project.org/web/packages/OAIHarvester/index.html).
 
 ## Installation from GitHub
 
@@ -37,9 +37,7 @@ library(ropenaire)
 
 ### Projects
 
-Search EC-funded projects by participant institutions
-
-Göttingen University by acronym `GOE`
+Search EC-funded projects by participant institutions, e.g. Göttingen University by acronym `GOE`
 
 ```{r}
 roa_projects(org = "UGOE")

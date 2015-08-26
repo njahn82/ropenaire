@@ -40,12 +40,12 @@ roa_datasets <-
     )
     if (is.null(args))
       stop("empty query")
-    out <- tt_GET(path = "search/datasets", query = args) %>%
+    out <- tt_GET(path = "search/publications", query = args) %>%
       content(quote = "")
-    if (nrow(out) == 0) {
+    if (nrow(out) == 0)
       NULL
-    } else {
-      fixes(out) %>%
-        tbl_df
-    }
+    else
+      as.data.frame(sapply(out, function(x)
+        gsub("\"", "", x)), stringsAsFactors  = FALSE)
   }
+
