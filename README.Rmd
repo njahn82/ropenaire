@@ -15,9 +15,9 @@ knitr::opts_chunk$set(
 
 ## About
 
-`ropenaire` gives access to the [OpenAIRE RESTful API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) is an open science initiative, which supports the Open Access policy of the European Commission. OpenAIRE aggregates from over 630 datasources over 12 mio pubs and datasets published in 5,800 OA repositories and journals.
+**ropenaire** gives access to the [OpenAIRE RESTful API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) is an open science initiative, which supports the Open Access policy of the European Commission. OpenAIRE aggregates over 12 mio publication and datasets from over 5,800 OA repositories and journals.
 
-The API is intended for metadata discovery and exploration only. The number of total return results returned by one query is limited to 10,000.
+The API is intended for metadata discovery and exploration only. Note that the number of results returned by one query is limited to 10,000.
 
 For bulk access, please use the [OpenAIRE OAI-PMH endpoint](http://api.openaire.eu/#cha_oai_pmh), which can be queried by [Scott's OAI-PMH client](https://github.com/sckott/oai) or [OAIHarvester](https://cran.r-project.org/web/packages/OAIHarvester/index.html).
 
@@ -37,13 +37,21 @@ library(ropenaire)
 
 ### Projects
 
-Search EC-funded projects by participant institutions, e.g. Göttingen University by acronym `GOE`
+Search for EC-funded projects by participating institution. For example, Göttingen University has the acronym `GOE`
 
 ```{r}
 roa_projects(org = "UGOE") %>%
   head()
 ```
- 
+
+Search projects by call id
+
+```{r}
+roa_projects(call_id = "FP7-PEOPLE-2013-IOF") %>%
+  head()
+```
+
+
 ### Publications
 
 Publications from the 2nd-Generation Open Access Infrastructure for Research in Europe project, which has the grant id 283595.
@@ -70,11 +78,11 @@ roa_datasets(title = "methane") %>%
 
 ```
 
-### Get all the FP7-supported publications from projects an institution participates in
+### Get all the FP7-supported publications from a participating institution 
 
 ```{r}
 ugoe <- roa_projects(org = "UGOE")
-plyr::ldply(as.character(ugoe$grantID), roa_pubs) %>%
+plyr::ldply(ugoe$grantID, roa_pubs) %>%
   head()
 ```
 

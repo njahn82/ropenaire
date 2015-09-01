@@ -8,9 +8,9 @@
 
 ## About
 
-`ropenaire` gives access to the [OpenAIRE RESTful API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) is an open science initiative, which supports the Open Access policy of the European Commission. OpenAIRE aggregates from over 630 datasources over 12 mio pubs and datasets published in 5,800 OA repositories and journals.
+**ropenaire** gives access to the [OpenAIRE RESTful API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) is an open science initiative, which supports the Open Access policy of the European Commission. OpenAIRE aggregates over 12 mio publication and datasets from over 5,800 OA repositories and journals.
 
-The API is intended for metadata discovery and exploration only. The number of total return results returned by one query is limited to 10,000.
+The API is intended for metadata discovery and exploration only. Note that the number of results returned by one query is limited to 10,000.
 
 For bulk access, please use the [OpenAIRE OAI-PMH endpoint](http://api.openaire.eu/#cha_oai_pmh), which can be queried by [Scott's OAI-PMH client](https://github.com/sckott/oai) or [OAIHarvester](https://cran.r-project.org/web/packages/OAIHarvester/index.html).
 
@@ -32,7 +32,7 @@ library(ropenaire)
 
 ### Projects
 
-Search EC-funded projects by participant institutions, e.g. Göttingen University by acronym `GOE`
+Search for EC-funded projects by participating institution. For example, Göttingen University has the acronym `GOE`
 
 
 ```r
@@ -60,7 +60,37 @@ roa_projects(org = "UGOE") %>%
 #> 5 2014-05-01 2017-04-30   FP7-PEOPLE-2013-IOF  false
 #> 6 2012-01-01 2016-12-31 ERC-2011-StG_20101014  false
 ```
- 
+
+Search projects by call id
+
+
+```r
+roa_projects(call_id = "FP7-PEOPLE-2013-IOF") %>%
+  head()
+#>   grantID  acronym
+#> 1  622936   SEXSEL
+#> 2  627781      AWE
+#> 3  622974 TELESTES
+#> 4  627639  BIOHELP
+#> 5  624040   MAREST
+#> 6  624968     TPAB
+#>                                                                                          title
+#> 1 Investigating the joint role of balancing and positive selection in mating systems evolution
+#> 2                       Accurate Waveforms for Extreme/Intermediate-mass-ratio-inspirals (AWE)
+#> 3                                TELESTES. Musics, cults and rites of a Greek city in the West
+#> 4   Revealing the hidden secrets of the MEP pathway to engineer new bio-resources for humanity
+#> 5                                                      Marine Ecosystem Stability and Turnover
+#> 6                                                   Toward a Phenomenology of the Anxious Body
+#>    startdate    enddate      callidentifier ecsc39
+#> 1 2014-07-01 2017-06-30 FP7-PEOPLE-2013-IOF  false
+#> 2 2014-10-01 2017-09-30 FP7-PEOPLE-2013-IOF  false
+#> 3 2014-03-01 2017-02-28 FP7-PEOPLE-2013-IOF  false
+#> 4 2014-09-01 2017-08-31 FP7-PEOPLE-2013-IOF  false
+#> 5 2015-01-01 2017-12-31 FP7-PEOPLE-2013-IOF  false
+#> 6 2014-10-01 2017-09-30 FP7-PEOPLE-2013-IOF  false
+```
+
+
 ### Publications
 
 Publications from the 2nd-Generation Open Access Infrastructure for Research in Europe project, which has the grant id 283595.
@@ -222,12 +252,12 @@ roa_datasets(title = "methane") %>%
 #> 6       OPEN
 ```
 
-### Get all the FP7-supported publications from projects an institution participates in
+### Get all the FP7-supported publications from a participating institution 
 
 
 ```r
 ugoe <- roa_projects(org = "UGOE")
-plyr::ldply(as.character(ugoe$grantID), roa_pubs) %>%
+plyr::ldply(ugoe$grantID, roa_pubs) %>%
   head()
 #>                                                                    Title
 #> 1                         DISTRIBUTION OF MASS OF HOLOMORPHIC CUSP FORMS
@@ -236,27 +266,27 @@ plyr::ldply(as.character(ugoe$grantID), roa_pubs) %>%
 #> 4                                 Automorphisms with exotic orbit growth
 #> 5              Subconvexity for sup-norms of automorphic forms on PGL(n)
 #> 6 Quadratic congruences on average and rational points on cubic surfaces
-#>                                                     Authors Publication.Year
-#> 1            Young, Matthew Khan, Rizwanur Blomer, Valentin       2013-01-01
-#> 2                         Brumley, Farrell Blomer, Valentin       2011-01-01
-#> 3                                            Baier, Stephan       2012-01-01
-#> 4 Jaidee, Sawian Stevens, Shaun Ward, Thomas Baier, Stephan       2013-01-01
-#> 5                               Maga, Péter Blomer, Valentin       2014-05-26
-#> 6                          Baier, Stephan Derenthal, Ulrich       2012-05-02
-#>                            DOI                           Permanent.identifier
-#> 1     10.1215/00127094-2380967 http://projecteuclid.org/euclid.dmj/1383760700
-#> 2 10.4007/annals.2011.174.1.18                 http://arxiv.org/abs/1003.0559
-#> 3    10.1007/s00605-011-0372-7                 http://arxiv.org/abs/1108.2715
-#> 4            10.4064/aa158-2-5                 http://arxiv.org/abs/1201.4503
-#> 5                                              http://arxiv.org/abs/1405.6691
-#> 6                                              http://arxiv.org/abs/1205.0373
-#>   Publication.type
-#> 1          Article
-#> 2          Article
-#> 3          Article
-#> 4          Article
-#> 5          Article
-#> 6          Article
+#>                                                     Authors
+#> 1            Young, Matthew Khan, Rizwanur Blomer, Valentin
+#> 2                         Brumley, Farrell Blomer, Valentin
+#> 3                                            Baier, Stephan
+#> 4 Jaidee, Sawian Stevens, Shaun Ward, Thomas Baier, Stephan
+#> 5                               Maga, Péter Blomer, Valentin
+#> 6                          Baier, Stephan Derenthal, Ulrich
+#>   Publication.Year                          DOI
+#> 1       2013-01-01     10.1215/00127094-2380967
+#> 2       2011-01-01 10.4007/annals.2011.174.1.18
+#> 3       2012-01-01    10.1007/s00605-011-0372-7
+#> 4       2013-01-01            10.4064/aa158-2-5
+#> 5       2014-05-26                             
+#> 6       2012-05-02                             
+#>                             Permanent.identifier Publication.type
+#> 1 http://projecteuclid.org/euclid.dmj/1383760700          Article
+#> 2                 http://arxiv.org/abs/1003.0559          Article
+#> 3                 http://arxiv.org/abs/1108.2715          Article
+#> 4                 http://arxiv.org/abs/1201.4503          Article
+#> 5                 http://arxiv.org/abs/1405.6691          Article
+#> 6                 http://arxiv.org/abs/1205.0373          Article
 #>                                                               Journal
 #> 1                         Duke Math. J. 162, no. 14 (2013), 2609-2644
 #> 2                                                                    
