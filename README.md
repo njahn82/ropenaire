@@ -8,7 +8,7 @@
 
 ## About
 
-`ropenaire` gives access to the [OpenAIRE RESTful API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) is an open science initiative, which supports the Open Access policy of the European Commission. So far, OpenAIRE facilitates access to over 11 million publications from various sources such as 5,800 open access repositories.
+`ropenaire` gives access to the [OpenAIRE RESTful API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) is an open science initiative, which supports the Open Access policy of the European Commission. OpenAIRE aggregates from over 630 datasources over 12 mio pubs and datasets published in 5,800 OA repositories and journals.
 
 The API is intended for metadata discovery and exploration only. The number of total return results returned by one query is limited to 10,000.
 
@@ -236,27 +236,27 @@ plyr::ldply(as.character(ugoe$grantID), roa_pubs) %>%
 #> 4                                 Automorphisms with exotic orbit growth
 #> 5              Subconvexity for sup-norms of automorphic forms on PGL(n)
 #> 6 Quadratic congruences on average and rational points on cubic surfaces
-#>                                                     Authors
-#> 1            Young, Matthew Khan, Rizwanur Blomer, Valentin
-#> 2                         Brumley, Farrell Blomer, Valentin
-#> 3                                            Baier, Stephan
-#> 4 Jaidee, Sawian Stevens, Shaun Ward, Thomas Baier, Stephan
-#> 5                               Maga, Péter Blomer, Valentin
-#> 6                          Baier, Stephan Derenthal, Ulrich
-#>   Publication.Year                          DOI
-#> 1       2013-01-01     10.1215/00127094-2380967
-#> 2       2011-01-01 10.4007/annals.2011.174.1.18
-#> 3       2012-01-01    10.1007/s00605-011-0372-7
-#> 4       2013-01-01            10.4064/aa158-2-5
-#> 5       2014-05-26                             
-#> 6       2012-05-02                             
-#>                             Permanent.identifier Publication.type
-#> 1 http://projecteuclid.org/euclid.dmj/1383760700          Article
-#> 2                 http://arxiv.org/abs/1003.0559          Article
-#> 3                 http://arxiv.org/abs/1108.2715          Article
-#> 4                 http://arxiv.org/abs/1201.4503          Article
-#> 5                 http://arxiv.org/abs/1405.6691          Article
-#> 6                 http://arxiv.org/abs/1205.0373          Article
+#>                                                     Authors Publication.Year
+#> 1            Young, Matthew Khan, Rizwanur Blomer, Valentin       2013-01-01
+#> 2                         Brumley, Farrell Blomer, Valentin       2011-01-01
+#> 3                                            Baier, Stephan       2012-01-01
+#> 4 Jaidee, Sawian Stevens, Shaun Ward, Thomas Baier, Stephan       2013-01-01
+#> 5                               Maga, Péter Blomer, Valentin       2014-05-26
+#> 6                          Baier, Stephan Derenthal, Ulrich       2012-05-02
+#>                            DOI                           Permanent.identifier
+#> 1     10.1215/00127094-2380967 http://projecteuclid.org/euclid.dmj/1383760700
+#> 2 10.4007/annals.2011.174.1.18                 http://arxiv.org/abs/1003.0559
+#> 3    10.1007/s00605-011-0372-7                 http://arxiv.org/abs/1108.2715
+#> 4            10.4064/aa158-2-5                 http://arxiv.org/abs/1201.4503
+#> 5                                              http://arxiv.org/abs/1405.6691
+#> 6                                              http://arxiv.org/abs/1205.0373
+#>   Publication.type
+#> 1          Article
+#> 2          Article
+#> 3          Article
+#> 4          Article
+#> 5          Article
+#> 6          Article
 #>                                                               Journal
 #> 1                         Duke Math. J. 162, no. 14 (2013), 2609-2644
 #> 2                                                                    

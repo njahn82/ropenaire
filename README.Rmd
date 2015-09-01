@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 ## About
 
-`ropenaire` gives access to the [OpenAIRE RESTful API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) is an open science initiative, which supports the Open Access policy of the European Commission. So far, OpenAIRE facilitates access to over 11 million publications from various sources such as 5,800 open access repositories.
+`ropenaire` gives access to the [OpenAIRE RESTful API](http://api.openaire.eu/) with R. [OpenAIRE](https://www.openaire.eu/) is an open science initiative, which supports the Open Access policy of the European Commission. OpenAIRE aggregates from over 630 datasources over 12 mio pubs and datasets published in 5,800 OA repositories and journals.
 
 The API is intended for metadata discovery and exploration only. The number of total return results returned by one query is limited to 10,000.
 
