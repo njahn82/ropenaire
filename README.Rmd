@@ -40,7 +40,8 @@ library(ropenaire)
 Search EC-funded projects by participant institutions, e.g. Göttingen University by acronym `GOE`
 
 ```{r}
-roa_projects(org = "UGOE")
+roa_projects(org = "UGOE") %>%
+  head()
 ```
  
 ### Publications
@@ -48,13 +49,8 @@ roa_projects(org = "UGOE")
 Publications from the 2nd-Generation Open Access Infrastructure for Research in Europe project, which has the grant id 283595.
 
 ```{r}
-my_pubs <- roa_pubs(fp7 = "283595")
-```
-
-Show how many of them are Open Access 
-
-```{r}
-table(my_pubs$Access)
+roa_pubs(fp7 = "283595") %>%
+  head() 
 ```
 
 ### Datasets
@@ -62,13 +58,15 @@ table(my_pubs$Access)
 Search for FP7 grant-supported datasets
 
 ```{r}
-roa_datasets(fp7 = "247153")
+roa_datasets(fp7 = "247153") %>%
+  head()
 ```
 
 Search by title keywords
 
 ```{r}
-roa_datasets(title = "methane") 
+roa_datasets(title = "methane") %>%
+  head()
 
 ```
 
@@ -76,16 +74,13 @@ roa_datasets(title = "methane")
 
 ```{r}
 ugoe <- roa_projects(org = "UGOE")
-tt <- plyr::ldply(as.character(ugoe$grantID), roa_pubs)
-
-head(tt)
-
-table(tt$Access)
+plyr::ldply(as.character(ugoe$grantID), roa_pubs) %>%
+  head()
 ```
 
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/njahn82/ropenaire/issues).
-* License: MIT
+* License: MIT ©Najko Jahn
 
 

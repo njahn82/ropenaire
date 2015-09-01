@@ -16,3 +16,9 @@ tt_check <- function(req) {
     return(invisible())
   stop("HTTP failure: ", req$status_code, "\n", call. = FALSE)
 }
+
+# fixes
+# fix double quotation in tsv
+quote_fixing <- function(x){
+  gsub('\"', '', x)
+}

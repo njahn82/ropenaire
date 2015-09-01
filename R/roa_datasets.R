@@ -45,7 +45,6 @@ roa_datasets <-
     if (nrow(out) == 0)
       NULL
     else
-      as.data.frame(sapply(out, function(x)
-        gsub("\"", "", x)), stringsAsFactors  = FALSE)
+      dplyr::mutate_each(out, funs(quote_fixing))
   }
 
