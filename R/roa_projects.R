@@ -20,11 +20,12 @@
 #'
 #' roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
 #' }
-roa_projects <- function(grant_id = NULL, title = NULL, acronym = NULL, call_id = NULL, start_year = NULL,
-                         end_year = NULL, country = NULL, org = NULL, limit = 1000, ...) {
+roa_projects <- function(grant_id = NULL, title = NULL, acronym = NULL,
+                         call_id = NULL, start_year = NULL, end_year = NULL,
+                         country = NULL, org = NULL, limit = 1000, ...) {
   args <- list(
     participantAcronyms = org,
-    GrantID = grant_id,
+    grantID = grant_id,
     name = title,
     acronym = acronym,
     callID = call_id,
@@ -52,7 +53,10 @@ parse_project <- function(x) {
     startdate = "//startdate",
     enddate = "//enddate",
     callidentifier = "//callidentifier",
-    ecsc39 = "//ecsc39"
+    ecsc39 = "//ecsc39",
+    funding_level_0 = "//funding_level_0/name"
+#    funding_level_1 = "//funding_level_1/name",
+#    funding_level_2 = "//funding_level_2/name"
   )
   sapply(xp_queries, function(xp_queries)
     XML::xpathSApply(x, xp_queries, XML::xmlValue))

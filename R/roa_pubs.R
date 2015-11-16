@@ -26,8 +26,8 @@
 #' roa_pubs(doi = "10.1051/0004-6361/201220935")
 #' }
 roa_pubs <-
-  function(fp7 = NULL, limit = 1000, id = NULL, doi = NULL, title = NULL, author = NULL, from_date = NULL,
-           to_date = NULL, ...) {
+  function(fp7 = NULL, limit = 1000, id = NULL, doi = NULL,
+           title = NULL, author = NULL, from_date = NULL, to_date = NULL, ...) {
     args <- list(
       FP7ProjectID = fp7,
       size = limit,

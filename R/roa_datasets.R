@@ -25,8 +25,8 @@
 #' roa_datasets(title = "methane")
 #' }
 roa_datasets <-
-  function(fp7 = NULL, limit = 1000, id = NULL, title = NULL, author = NULL, from_date = NULL,
-           to_date = NULL, ...) {
+  function(fp7 = NULL, limit = 1000, id = NULL, title = NULL, author = NULL,
+           from_date = NULL, to_date = NULL, ...) {
     args <- list(
       FP7ProjectID = fp7,
       size = limit,
@@ -47,4 +47,3 @@ roa_datasets <-
     else
       dplyr::mutate_each(out, funs(quote_fixing))
   }
-
