@@ -4,9 +4,9 @@
 \name{ropenaire-package}
 \alias{ropenaire-package}
 \alias{ropenaire}
-\title{**Client for the OpenAIRE API**}
+\title{\strong{Client for the OpenAIRE API}}
 \description{
-**Client for the OpenAIRE API**
+\strong{Client for the OpenAIRE API}
 }
 \author{
 Najko Jahn \email{najko.jahn@uni-bielefeld.de}

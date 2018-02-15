@@ -1,13 +1,18 @@
 # utility functions
+oa_base <- function() "http://api.openaire.eu/"
+
+`%||%` <- function(x, y) if (is.null(x)) y else x
+
+comp <- function(x) Filter(Negate(is.null), x)
 
 tt_GET <- function(path, ...){
-  if (is.null(path))
-    stop("Nothing to parse")
-  uri <- "http://api.openaire.eu/"
+  if (is.null(path)) stop("Nothing to parse")
   # call api
-  req <- httr::GET(uri, path = path, ...)
+  cli <- crul::HttpClient$new(url = oa_base())
+  req <- cli$get(path = path, ...)
   # check for http status
-  tt_check(req)
+  req$raise_for_status()
+  # tt_check(req)
   req
 }
 
