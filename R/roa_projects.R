@@ -11,8 +11,6 @@
 #' @param limit number of projects to be returned
 #' @param ... other API parameters \url{http://api.openaire.eu/}
 #'
-#' @import XML
-#' @import httr
 #' @export
 #'
 #' @examples \dontrun{

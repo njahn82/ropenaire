@@ -19,6 +19,7 @@ LazyData: TRUE
 Imports:
   crul,
   xml2,
+  jsonlite,
   dplyr
 Suggests:
   testthat,

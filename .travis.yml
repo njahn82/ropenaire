@@ -1,12 +1,11 @@
-# Sample .travis.yml for R projects
-
 language: r
-warnings_are_errors: true
-sudo: required
+warnings_are_errors: false
+cache: pacakages
+sudo: false
 
 env:
  global:
-   - CRAN: http://cran.rstudio.com
+   - CRAN: https://cran.rstudio.com
 
 notifications:
   email:
@@ -15,5 +14,6 @@ notifications:
 
 r_github_packages:
   - jimhester/covr
+
 after_success:
-  - Rscript -e 'library(covr);codecov()'
+  - Rscript -e 'library(covr); covr::codecov()'

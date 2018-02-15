@@ -14,8 +14,6 @@
 #' @param ... other API parameters \url{http://api.openaire.eu/}
 #'
 #' @export
-#' @import httr
-#' @import dplyr
 #' @examples \dontrun{
 #' # Search for FP7 grant-supported publications
 #' my_pubs <- roa_pubs(fp7 = "283595")

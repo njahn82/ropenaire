@@ -3,6 +3,3 @@
 export(roa_datasets)
 export(roa_projects)
 export(roa_pubs)
-import(XML)
-import(dplyr)
-import(httr)
