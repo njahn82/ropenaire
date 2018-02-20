@@ -1,47 +1,50 @@
 #' Search FP7 publications
 #'
-#' @param fp7 Search for publications associated to a FP7 project with the given grant number
+#' @export
+#' @param fp7 Search for publications associated to a FP7 project with the 
+#' given grant number
 #' @param limit limit number of records
 #' @param doi Gets the publications with the given DOIs
-#' @param id Gets the publication with the given openaire identifier, if any.
-#' @param from_date Gets the publications whose date of acceptance is greater than or equal the given date.
-#' Allowed values: date formatted as YYYY-MM-DD.
-#' @param to_date Gets the publications whose date of acceptance is less than or equal the given date.
-#' Allowed values: date formatted as YYYY-MM-DD.
+#' @param publication_id Gets the publication with the given openaire 
+#' identifier, if any.
+#' @param from_date Gets the publications whose date of acceptance is greater 
+#' than or equal the given date. Allowed values: date formatted as YYYY-MM-DD.
+#' @param to_date Gets the publications whose date of acceptance is less than 
+#' or equal the given date. Allowed values: date formatted as YYYY-MM-DD.
 #' @param title Publication title
 #' @param author Search for publications by authors
+#' @param ... curl options passed on to [crul::HttpClient]
 #'
-#' @param ... other API parameters \url{http://api.openaire.eu/}
+#' @references OpenAIRE API docs <http://api.openaire.eu/>
 #'
-#' @export
 #' @examples \dontrun{
 #' # Search for FP7 grant-supported publications
 #' my_pubs <- roa_pubs(fp7 = "283595")
-#' Show how many of them are Open Access
+#' # Show how many of them are Open Access
 #' table(my_pubs$Access)
 #'
-#' Search by doi
+#' # Search by doi
 #' roa_pubs(doi = "10.1051/0004-6361/201220935")
+#' 
+#' # curl options
+#' x <- roa_pubs(doi = "10.1051/0004-6361/201220935", verbose = TRUE)
 #' }
-roa_pubs <-
-  function(fp7 = NULL, limit = 1000, id = NULL, doi = NULL,
-           title = NULL, author = NULL, from_date = NULL, to_date = NULL, ...) {
-    args <- list(
-      FP7ProjectID = fp7,
-      size = limit,
-      id = id,
-      doi = doi,
-      title = title,
-      fromDateAccepted = from_date,
-      toDateAccepted = to_date,
-      format = "tsv", ...
-    )
-    if (is.null(args))
-      stop("empty query")
-    out <- tt_GET(path = "search/publications", query = args) %>%
-      content(quote = "")
-    if (nrow(out) == 0)
-      NULL
-    else
-      dplyr::mutate_each(out, funs(quote_fixing))
-  }
+roa_pubs <- function(fp7 = NULL, publication_id = NULL, dataset_id = NULL, 
+  doi = NULL, provider_id = NULL, project_id = NULL, has_project = NULL, 
+  oa = NULL, title = NULL, author = NULL, from_date = NULL, 
+  to_date = NULL, limit = 1000, sort_by = NULL, format = "tsv", ...) {
+
+  args <- comp(list(
+    FP7ProjectID = fp7, openaireDatasetID = dataset_id,
+    openairePublicationID = publication_id,
+    doi = doi, openaireProviderID = provider_id,
+    openaireProjectID = project_id, title = title,
+    author = author, hasProject = has_project,
+    OA = oa, fromDateAccepted = from_date,
+    toDateAccepted = to_date, size = limit, sortBy = sort_by,
+    format = format
+  ))
+  if (is.null(args)) stop("empty query")
+  out <- tt_GET(path = "search/publications", query = args, ...)
+  tt_parse(out, format)
+}

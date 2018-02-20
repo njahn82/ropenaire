@@ -4,12 +4,15 @@
 \alias{roa_projects}
 \title{Get EC projects}
 \usage{
-roa_projects(grant_id = NULL, title = NULL, acronym = NULL,
-  call_id = NULL, start_year = NULL, end_year = NULL, country = NULL,
-  org = NULL, limit = 1000, ...)
+roa_projects(grant_id = NULL, publication_id = NULL, title = NULL,
+  acronym = NULL, call_id = NULL, start_year = NULL, end_year = NULL,
+  country = NULL, org = NULL, limit = 1000, sort_by = NULL, ...)
 }
 \arguments{
-\item{grant_id}{Gets the project with the given grant identifier, if any}
+\item{grant_id}{Gets the project with the given grant identifier,
+if any}
+
+\item{publication_id}{publication ID}
 
 \item{title}{Name of the project}
 
@@ -17,25 +20,38 @@ roa_projects(grant_id = NULL, title = NULL, acronym = NULL,
 
 \item{call_id}{Search for projects by call identifier}
 
-\item{start_year}{Gets the projects that started in the given year. Format: YYYY}
+\item{start_year}{Gets the projects that started in the given year.
+Format: YYYY}
 
-\item{end_year}{Gets the projects that ended in the given year. Format: YYYY}
+\item{end_year}{Gets the projects that ended in the given year.
+Format: YYYY}
 
-\item{country}{Search for projects by participant countries. Foramt: 2-letter country code}
+\item{country}{Search for projects by participant countries. Foramt:
+2-letter country code}
 
 \item{org}{Search for projects by participant institutions (acronym)}
 
 \item{limit}{number of projects to be returned}
 
-\item{...}{other API parameters \url{http://api.openaire.eu/}}
+\item{sort_by}{sort field}
+
+\item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
 }
 \description{
 Get EC projects
 }
+\note{
+\code{format} is hard coded to \code{xml} for now
+}
 \examples{
 \dontrun{
-roa_projects(org = "UGOE")
-
+x <- roa_projects(org = "UGOE", limit = 10)
 roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
+
+# curl options
+x <- roa_projects(org = "UGOE", limit = 10, verbose = TRUE)
 }
+}
+\references{
+OpenAIRE API docs \url{http://api.openaire.eu/}
 }
