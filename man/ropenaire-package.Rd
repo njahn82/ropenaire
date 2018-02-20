@@ -10,4 +10,6 @@
 }
 \author{
 Najko Jahn \email{najko.jahn@uni-bielefeld.de}
+
+Scott Chamberlain \email{myrmecocystus@gmail.com}
 }

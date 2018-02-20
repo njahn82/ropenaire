@@ -3,3 +3,8 @@
 export(roa_datasets)
 export(roa_projects)
 export(roa_pubs)
+importFrom(crul,HttpClient)
+importFrom(jsonlite,fromJSON)
+importFrom(readr,read_csv)
+importFrom(readr,read_tsv)
+importFrom(xml2,read_xml)

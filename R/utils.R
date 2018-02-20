@@ -5,25 +5,35 @@ oa_base <- function() "http://api.openaire.eu/"
 
 comp <- function(x) Filter(Negate(is.null), x)
 
-tt_GET <- function(path, ...){
+tt_GET <- function(path, ...) {
   if (is.null(path)) stop("Nothing to parse")
-  # call api
   cli <- crul::HttpClient$new(url = oa_base())
   req <- cli$get(path = path, ...)
-  # check for http status
   req$raise_for_status()
-  # tt_check(req)
-  req
+  return(req)
 }
 
-tt_check <- function(req) {
-  if (req$status_code < 400)
-    return(invisible())
-  stop("HTTP failure: ", req$status_code, "\n", call. = FALSE)
-}
-
-# fixes
 # fix double quotation in tsv
 quote_fixing <- function(x){
   gsub('\"', '', x)
+}
+
+assert <- function(x, y) {
+  if (!is.null(x)) {
+    if (!inherits(x, y)) {
+      stop(deparse(substitute(x)), " must be of class ",
+           paste0(y, collapse = ", "), call. = FALSE)
+    }
+  }
+}
+
+tt_parse <- function(x, format) {
+  switch(
+    format,
+    json = jsonlite::fromJSON(x$parse("UTF-8")),
+    tsv = readr::read_tsv(x$content),
+    csv = readr::read_csv(x$content),
+    xml = xml2::read_xml(x$content),
+    stop("'format' must be of josn, tsv, csv, or xml")
+  )
 }

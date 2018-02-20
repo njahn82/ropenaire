@@ -7,7 +7,7 @@
 roa_datasets(fp7 = NULL, dataset_id = NULL, doi = NULL,
   provider_id = NULL, project_id = NULL, has_project = NULL, oa = NULL,
   title = NULL, author = NULL, from_date = NULL, to_date = NULL,
-  limit = 1000, sort_by = NULL, format = "json", ...)
+  limit = 1000, sort_by = NULL, format = "tsv", ...)
 }
 \arguments{
 \item{fp7}{Search for dataset associated to a FP7 project with the given
@@ -46,7 +46,7 @@ equal the given date. Allowed values: date formatted as YYYY-MM-DD.}
 
 \item{sort_by}{sort field}
 
-\item{format}{format to return, one of json, xml, csv or tsv}
+\item{format}{format to return, one of json, xml, csv or tsv (default)}
 
 \item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
 }
@@ -58,10 +58,17 @@ to a funding stream
 \examples{
 \dontrun{
 # Search for FP7 grant-supported datasets
-res <- roa_datasets(fp7 = "247153")
-res
+res <- roa_datasets(fp7 = "247153", limit = 10)
+str(res)
 
-roa_datasets(title = "methane")
+# different formats
+roa_datasets(title = "methane", limit = 3, format = "json")
+roa_datasets(title = "methane", limit = 3, format = "tsv")
+roa_datasets(title = "methane", limit = 3, format = "csv")
+roa_datasets(title = "methane", limit = 3, format = "xml")
+
+# curl options
+res <- roa_datasets(fp7 = "247153", limit = 3, verbose = TRUE)
 }
 }
 \references{
