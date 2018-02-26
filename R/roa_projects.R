@@ -5,43 +5,45 @@
 #' if any
 #' @param publication_id publication ID
 #' @param title Name of the project
-#' @param acronym Acronym
+#' @param acronym Gets the project with the given acronym, if any.
 #' @param call_id Search for projects by call identifier
 #' @param start_year Gets the projects that started in the given year. 
 #' Format: YYYY
 #' @param end_year Gets the projects that ended in the given year. 
 #' Format: YYYY
-#' @param country Search for projects by participant countries. Foramt: 
+#' @param country Search for projects by participant countries. Format: 
 #' 2-letter country code
 #' @param org Search for projects by participant institutions (acronym)
-#' @param limit number of projects to be returned
-#' @param sort_by sort field
-#' @param ... curl options passed on to [crul::HttpClient]
+#' @param sort_by sort field, one of projectstartdate, projectstartyear, 
+#' projectenddate, projectendyear, projectduration
+#' @inheritParams roa_datasets
 #'
 #' @references OpenAIRE API docs <http://api.openaire.eu/>
 #' 
 #' @note `format` is hard coded to `xml` for now
 #'
 #' @examples \dontrun{
-#' x <- roa_projects(org = "UGOE", limit = 10)
+#' roa_projects(org = "UGOE", size = 10)
 #' roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
 #' 
 #' # curl options
-#' x <- roa_projects(org = "UGOE", limit = 10, verbose = TRUE)
+#' x <- roa_projects(org = "UGOE", size = 10, verbose = TRUE)
 #' }
 roa_projects <- function(grant_id = NULL, publication_id = NULL, title = NULL, 
   acronym = NULL, call_id = NULL, start_year = NULL, end_year = NULL,
-  country = NULL, org = NULL, limit = 1000, sort_by = NULL, ...) {
+  country = NULL, org = NULL, size = 1000, sort_by = NULL, ...) {
   
   args <- comp(list(grantID = grant_id, openairePublicationID = publication_id,
       name = title, acronym = acronym, callID = call_id, startYear = start_year,
       endYear = end_year, participantAcronyms = org,
-      participantCountries = country, size = limit, sortBy = sort_by, 
+      participantCountries = country, size = size, sortBy = sort_by, 
       format = "xml"))
   if (is.null(args)) stop("empty query")
   out <- tt_GET(path = "search/projects", query = args, ...)
-  res <- tt_parse(out, format)
-  as.data.frame(parse_project(res), stringsAsFactors = FALSE)
+  res <- tt_parse(out, 'xml')
+  tibble::as_tibble(
+    as.data.frame(parse_project(res), stringsAsFactors = FALSE)
+  )
 }
 
 parse_project <- function(x) {

@@ -3,7 +3,6 @@
 #' @export
 #' @param fp7 Search for publications associated to a FP7 project with the 
 #' given grant number
-#' @param limit limit number of records
 #' @param doi Gets the publications with the given DOIs
 #' @param publication_id Gets the publication with the given openaire 
 #' identifier, if any.
@@ -13,7 +12,7 @@
 #' or equal the given date. Allowed values: date formatted as YYYY-MM-DD.
 #' @param title Publication title
 #' @param author Search for publications by authors
-#' @param ... curl options passed on to [crul::HttpClient]
+#' @inheritParams roa_datasets
 #'
 #' @references OpenAIRE API docs <http://api.openaire.eu/>
 #'
@@ -32,8 +31,9 @@
 roa_pubs <- function(fp7 = NULL, publication_id = NULL, dataset_id = NULL, 
   doi = NULL, provider_id = NULL, project_id = NULL, has_project = NULL, 
   oa = NULL, title = NULL, author = NULL, from_date = NULL, 
-  to_date = NULL, limit = 1000, sort_by = NULL, format = "tsv", ...) {
+  to_date = NULL, size = 1000, sort_by = NULL, format = "tsv", ...) {
 
+  check_format(format)
   args <- comp(list(
     FP7ProjectID = fp7, openaireDatasetID = dataset_id,
     openairePublicationID = publication_id,
@@ -41,9 +41,10 @@ roa_pubs <- function(fp7 = NULL, publication_id = NULL, dataset_id = NULL,
     openaireProjectID = project_id, title = title,
     author = author, hasProject = has_project,
     OA = oa, fromDateAccepted = from_date,
-    toDateAccepted = to_date, size = limit, sortBy = sort_by,
+    toDateAccepted = to_date, size = size, sortBy = sort_by,
     format = format
   ))
+  assert_args(args)
   if (is.null(args)) stop("empty query")
   out <- tt_GET(path = "search/publications", query = args, ...)
   tt_parse(out, format)

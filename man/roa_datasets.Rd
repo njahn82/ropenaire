@@ -7,7 +7,7 @@
 roa_datasets(fp7 = NULL, dataset_id = NULL, doi = NULL,
   provider_id = NULL, project_id = NULL, has_project = NULL, oa = NULL,
   title = NULL, author = NULL, from_date = NULL, to_date = NULL,
-  limit = 1000, sort_by = NULL, format = "tsv", ...)
+  size = 1000, sort_by = NULL, sort_order = NULL, format = "tsv", ...)
 }
 \arguments{
 \item{fp7}{Search for dataset associated to a FP7 project with the given
@@ -42,9 +42,13 @@ or equal the given date. Allowed values: date formatted as YYYY-MM-DD.}
 \item{to_date}{Gets the dataset whose date of acceptance is less than or
 equal the given date. Allowed values: date formatted as YYYY-MM-DD.}
 
-\item{limit}{limit number of records}
+\item{size}{size number of records}
 
-\item{sort_by}{sort field}
+\item{sort_by}{sort field, one of dateofcollection, resultstoragedate,
+resultembargoenddate, resultembargoendyear, resultdateofacceptance,
+resultacceptanceyear}
+
+\item{sort_order}{sort order. one of ascending or descending. optional}
 
 \item{format}{format to return, one of json, xml, csv or tsv (default)}
 
@@ -58,17 +62,24 @@ to a funding stream
 \examples{
 \dontrun{
 # Search for FP7 grant-supported datasets
-res <- roa_datasets(fp7 = "247153", limit = 10)
+res <- roa_datasets(fp7 = "247153", size = 10)
 str(res)
 
 # different formats
-roa_datasets(title = "methane", limit = 3, format = "json")
-roa_datasets(title = "methane", limit = 3, format = "tsv")
-roa_datasets(title = "methane", limit = 3, format = "csv")
-roa_datasets(title = "methane", limit = 3, format = "xml")
+roa_datasets(title = "methane", size = 3, format = "json")
+roa_datasets(title = "methane", size = 3, format = "tsv")
+roa_datasets(title = "methane", size = 3, format = "csv")
+roa_datasets(title = "methane", size = 3, format = "xml")
+
+# sorting
+roa_datasets(sort_by = "dateofcollection", sort_order = "descending", 
+  size = 3)
+# vs
+roa_datasets(sort_by = "dateofcollection", sort_order = "ascending", 
+  size = 3)
 
 # curl options
-res <- roa_datasets(fp7 = "247153", limit = 3, verbose = TRUE)
+res <- roa_datasets(fp7 = "247153", size = 3, verbose = TRUE)
 }
 }
 \references{

@@ -4,6 +4,7 @@
 #' @importFrom xml2 read_xml
 #' @importFrom jsonlite fromJSON
 #' @importFrom crul HttpClient
+#' @importFrom tibble as_tibble
 #' @name ropenaire-package
 #' @aliases ropenaire
 #' @docType package

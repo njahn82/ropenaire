@@ -26,8 +26,11 @@
 #' or equal the given date. Allowed values: date formatted as YYYY-MM-DD.
 #' @param to_date Gets the dataset whose date of acceptance is less than or
 #' equal the given date. Allowed values: date formatted as YYYY-MM-DD.
-#' @param limit limit number of records
-#' @param sort_by sort field
+#' @param size size number of records
+#' @param sort_by sort field, one of dateofcollection, resultstoragedate, 
+#' resultembargoenddate, resultembargoendyear, resultdateofacceptance, 
+#' resultacceptanceyear
+#' @param sort_order sort order. one of ascending or descending. optional
 #' @param format format to return, one of json, xml, csv or tsv (default)
 #' @param ... curl options passed on to [crul::HttpClient]
 #'
@@ -35,30 +38,42 @@
 #'
 #' @examples \dontrun{
 #' # Search for FP7 grant-supported datasets
-#' res <- roa_datasets(fp7 = "247153", limit = 10)
+#' res <- roa_datasets(fp7 = "247153", size = 10)
 #' str(res)
 #'
 #' # different formats
-#' roa_datasets(title = "methane", limit = 3, format = "json")
-#' roa_datasets(title = "methane", limit = 3, format = "tsv")
-#' roa_datasets(title = "methane", limit = 3, format = "csv")
-#' roa_datasets(title = "methane", limit = 3, format = "xml")
+#' roa_datasets(title = "methane", size = 3, format = "json")
+#' roa_datasets(title = "methane", size = 3, format = "tsv")
+#' roa_datasets(title = "methane", size = 3, format = "csv")
+#' roa_datasets(title = "methane", size = 3, format = "xml")
+#' 
+#' # sorting
+#' roa_datasets(sort_by = "dateofcollection", sort_order = "descending", 
+#'   size = 3)
+#' # vs
+#' roa_datasets(sort_by = "dateofcollection", sort_order = "ascending", 
+#'   size = 3)
 #'
 #' # curl options
-#' res <- roa_datasets(fp7 = "247153", limit = 3, verbose = TRUE)
+#' res <- roa_datasets(fp7 = "247153", size = 3, verbose = TRUE)
 #' }
 roa_datasets <- function(fp7 = NULL, dataset_id = NULL, doi = NULL,
   provider_id = NULL, project_id = NULL, has_project = NULL, oa = NULL,
-  title = NULL, author = NULL, from_date = NULL, to_date = NULL, limit = 1000,
-  sort_by = NULL, format = "tsv", ...) {
+  title = NULL, author = NULL, from_date = NULL, to_date = NULL, size = 1000,
+  sort_by = NULL, sort_order = NULL, format = "tsv", ...) {
 
+  if (!is.null(sort_order)) {
+    if (!is.null(sort_by)) {
+      sort_by <- paste(sort_by, sort_order, sep = ",")
+    }
+  }
   args <- comp(list(
     FP7ProjectID = fp7, openaireDatasetID = dataset_id,
     doi = doi, openaireProviderID = provider_id,
     openaireProjectID = project_id, title = title,
     author = author, hasProject = has_project,
     OA = oa, fromDateAccepted = from_date,
-    toDateAccepted = to_date, size = limit, sortBy = sort_by,
+    toDateAccepted = to_date, size = size, sortBy = sort_by,
     format = format
   ))
   out <- tt_GET(path = "search/datasets", query = args, ...)

@@ -6,7 +6,7 @@
 \usage{
 roa_projects(grant_id = NULL, publication_id = NULL, title = NULL,
   acronym = NULL, call_id = NULL, start_year = NULL, end_year = NULL,
-  country = NULL, org = NULL, limit = 1000, sort_by = NULL, ...)
+  country = NULL, org = NULL, size = 1000, sort_by = NULL, ...)
 }
 \arguments{
 \item{grant_id}{Gets the project with the given grant identifier,
@@ -16,7 +16,7 @@ if any}
 
 \item{title}{Name of the project}
 
-\item{acronym}{Acronym}
+\item{acronym}{Gets the project with the given acronym, if any.}
 
 \item{call_id}{Search for projects by call identifier}
 
@@ -26,14 +26,15 @@ Format: YYYY}
 \item{end_year}{Gets the projects that ended in the given year.
 Format: YYYY}
 
-\item{country}{Search for projects by participant countries. Foramt:
+\item{country}{Search for projects by participant countries. Format:
 2-letter country code}
 
 \item{org}{Search for projects by participant institutions (acronym)}
 
-\item{limit}{number of projects to be returned}
+\item{size}{size number of records}
 
-\item{sort_by}{sort field}
+\item{sort_by}{sort field, one of projectstartdate, projectstartyear,
+projectenddate, projectendyear, projectduration}
 
 \item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
 }
@@ -45,11 +46,11 @@ Get EC projects
 }
 \examples{
 \dontrun{
-x <- roa_projects(org = "UGOE", limit = 10)
+roa_projects(org = "UGOE", size = 10)
 roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
 
 # curl options
-x <- roa_projects(org = "UGOE", limit = 10, verbose = TRUE)
+x <- roa_projects(org = "UGOE", size = 10, verbose = TRUE)
 }
 }
 \references{
