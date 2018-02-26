@@ -7,7 +7,8 @@
 roa_pubs(fp7 = NULL, publication_id = NULL, dataset_id = NULL,
   doi = NULL, provider_id = NULL, project_id = NULL, has_project = NULL,
   oa = NULL, title = NULL, author = NULL, from_date = NULL,
-  to_date = NULL, size = 1000, sort_by = NULL, format = "tsv", ...)
+  to_date = NULL, size = 1000, sort_by = NULL, sort_order = NULL,
+  format = "tsv", ...)
 }
 \arguments{
 \item{fp7}{Search for publications associated to a FP7 project with the
@@ -50,6 +51,8 @@ or equal the given date. Allowed values: date formatted as YYYY-MM-DD.}
 \item{sort_by}{sort field, one of dateofcollection, resultstoragedate,
 resultembargoenddate, resultembargoendyear, resultdateofacceptance,
 resultacceptanceyear}
+
+\item{sort_order}{sort order. one of ascending or descending. optional}
 
 \item{format}{format to return, one of json, xml, csv or tsv (default)}
 

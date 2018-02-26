@@ -6,7 +6,8 @@
 \usage{
 roa_projects(grant_id = NULL, publication_id = NULL, title = NULL,
   acronym = NULL, call_id = NULL, start_year = NULL, end_year = NULL,
-  country = NULL, org = NULL, size = 1000, sort_by = NULL, ...)
+  country = NULL, org = NULL, size = 1000, sort_by = NULL,
+  sort_order = NULL, ...)
 }
 \arguments{
 \item{grant_id}{Gets the project with the given grant identifier,
@@ -35,6 +36,8 @@ Format: YYYY}
 
 \item{sort_by}{sort field, one of projectstartdate, projectstartyear,
 projectenddate, projectendyear, projectduration}
+
+\item{sort_order}{sort order. one of ascending or descending. optional}
 
 \item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
 }

@@ -18,6 +18,5 @@ test_that("tt_parse function", {
     ## fails well
     expect_error(tt_parse("foo bar"), "argument \"format\" is missing")
     expect_error(tt_parse("foo bar", "stuff"),
-        "'format' must be of josn, tsv, csv, or xml")
+        "'format' must be of json, tsv, csv, or xml")
 })
-

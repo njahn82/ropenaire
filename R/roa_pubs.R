@@ -31,7 +31,8 @@
 roa_pubs <- function(fp7 = NULL, publication_id = NULL, dataset_id = NULL, 
   doi = NULL, provider_id = NULL, project_id = NULL, has_project = NULL, 
   oa = NULL, title = NULL, author = NULL, from_date = NULL, 
-  to_date = NULL, size = 1000, sort_by = NULL, format = "tsv", ...) {
+  to_date = NULL, size = 1000, sort_by = NULL, sort_order = NULL, 
+  format = "tsv", ...) {
 
   check_format(format)
   if (!is.null(sort_order)) {
