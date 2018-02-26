@@ -2,9 +2,9 @@
 
 # ropenaire
 
-[![Build Status](https://travis-ci.org/njahn82/ropenaire.svg?branch=master)](https://travis-ci.org/njahn82/ropenaire)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/njahn82/ropenaire?branch=master)](https://ci.appveyor.com/project/njahn82/ropenaire)
-[![codecov.io](http://codecov.io/github/njahn82/ropenaire/coverage.svg?branch=master)](http://codecov.io/github/njahn82/ropenaire?branch=master)
+[![Build Status](https://travis-ci.org/sckott/ropenaire.svg?branch=master)](https://travis-ci.org/sckott/ropenaire)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/sckott/ropenaire?branch=master)](https://ci.appveyor.com/project/sckott/ropenaire)
+[![codecov.io](http://codecov.io/github/sckott/ropenaire/coverage.svg?branch=master)](http://codecov.io/github/sckott/ropenaire?branch=master)
 
 ## About
 
