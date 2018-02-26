@@ -3,9 +3,9 @@ context("roa_datasets")
 test_that("roa_datasets works: format tsv", {
   skip_on_cran()
 
-  a <- sm(roa_datasets(title = "methane", limit = 3))
-  b <- sm(roa_datasets(fp7 = "247153", limit = 3))
-  c <- sm(roa_datasets(fp7 = "00000", limit = 3))
+  a <- sm(roa_datasets(title = "methane", size = 3))
+  b <- sm(roa_datasets(fp7 = "247153", size = 3))
+  c <- sm(roa_datasets(fp7 = "00000", size = 3))
 
   expect_is(a, "tbl_df")
   expect_equal(NCOL(a), 10)
@@ -23,7 +23,7 @@ test_that("roa_datasets works: format tsv", {
 test_that("roa_datasets works: format json", {
   skip_on_cran()
 
-  a <- sm(roa_datasets(title = "methane", limit = 3, format = "json"))
+  a <- sm(roa_datasets(title = "methane", size = 3, format = "json"))
 
   expect_is(a, "list")
   expect_named(a, 'response')
@@ -33,6 +33,11 @@ test_that("roa_datasets works: format json", {
   expect_named(a$response$results$result$metadata, "oaf:entity")
 })
 
-# test_that("roa_datasets fails well", {
-#   skip_on_cran()
-# })
+test_that("roa_datasets fails well", {
+  expect_error(roa_datasets(size = "adf"), 
+    "size must be of class numeric, integer")
+  expect_error(roa_datasets(format = "foobar"), 
+    "'format' must be one of")
+  expect_error(roa_datasets(format = 5), 
+    "format must be of class character")
+})

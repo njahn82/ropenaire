@@ -31,14 +31,20 @@
 #' }
 roa_projects <- function(grant_id = NULL, publication_id = NULL, title = NULL, 
   acronym = NULL, call_id = NULL, start_year = NULL, end_year = NULL,
-  country = NULL, org = NULL, size = 1000, sort_by = NULL, ...) {
+  country = NULL, org = NULL, size = 1000, sort_by = NULL, sort_order = NULL, 
+  ...) {
   
+  if (!is.null(sort_order)) {
+    if (!is.null(sort_by)) {
+      sort_by <- paste(sort_by, sort_order, sep = ",")
+    }
+  }
   args <- comp(list(grantID = grant_id, openairePublicationID = publication_id,
       name = title, acronym = acronym, callID = call_id, startYear = start_year,
       endYear = end_year, participantAcronyms = org,
       participantCountries = country, size = size, sortBy = sort_by, 
       format = "xml"))
-  if (is.null(args)) stop("empty query")
+  assert_args(args)
   out <- tt_GET(path = "search/projects", query = args, ...)
   res <- tt_parse(out, 'xml')
   tibble::as_tibble(

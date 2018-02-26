@@ -34,6 +34,11 @@ roa_pubs <- function(fp7 = NULL, publication_id = NULL, dataset_id = NULL,
   to_date = NULL, size = 1000, sort_by = NULL, format = "tsv", ...) {
 
   check_format(format)
+  if (!is.null(sort_order)) {
+    if (!is.null(sort_by)) {
+      sort_by <- paste(sort_by, sort_order, sep = ",")
+    }
+  }
   args <- comp(list(
     FP7ProjectID = fp7, openaireDatasetID = dataset_id,
     openairePublicationID = publication_id,
@@ -45,7 +50,6 @@ roa_pubs <- function(fp7 = NULL, publication_id = NULL, dataset_id = NULL,
     format = format
   ))
   assert_args(args)
-  if (is.null(args)) stop("empty query")
   out <- tt_GET(path = "search/publications", query = args, ...)
   tt_parse(out, format)
 }

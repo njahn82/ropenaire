@@ -62,6 +62,7 @@ roa_datasets <- function(fp7 = NULL, dataset_id = NULL, doi = NULL,
   title = NULL, author = NULL, from_date = NULL, to_date = NULL, size = 1000,
   sort_by = NULL, sort_order = NULL, format = "tsv", ...) {
 
+  check_format(format)
   if (!is.null(sort_order)) {
     if (!is.null(sort_by)) {
       sort_by <- paste(sort_by, sort_order, sep = ",")
@@ -76,6 +77,7 @@ roa_datasets <- function(fp7 = NULL, dataset_id = NULL, doi = NULL,
     toDateAccepted = to_date, size = size, sortBy = sort_by,
     format = format
   ))
+  assert_args(args)
   out <- tt_GET(path = "search/datasets", query = args, ...)
   tt_parse(out, format)
 }
