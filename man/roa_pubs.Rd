@@ -68,8 +68,28 @@ my_pubs <- roa_pubs(fp7 = "283595")
 # Show how many of them are Open Access
 table(my_pubs$Access)
 
+# publication id
+# roa_pubs(publication_id = )
+
+# dataset id
+# roa_pubs(dataset_id = )
+
 # Search by doi
 roa_pubs(doi = "10.1051/0004-6361/201220935")
+
+# provider id
+# roa_pubs(provider_id = )
+
+# project id
+# roa_pubs(project_id = )
+
+# has_project boolean
+roa_pubs(has_project = FALSE, size = 10)
+roa_pubs(has_project = TRUE, size = 10)
+
+# publication id
+# roa_pubs(publication_id = )
+
 
 # curl options
 x <- roa_pubs(doi = "10.1051/0004-6361/201220935", verbose = TRUE)

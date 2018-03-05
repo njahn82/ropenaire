@@ -23,8 +23,9 @@
 #' @note `format` is hard coded to `xml` for now
 #'
 #' @examples \dontrun{
-#' roa_projects(org = "UGOE", size = 10)
+#' roa_projects(org = "UGOE", size = 3)
 #' roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
+#' roa_projects(title = "open", size = 3)
 #' 
 #' # curl options
 #' x <- roa_projects(org = "UGOE", size = 10, verbose = TRUE)
@@ -48,22 +49,27 @@ roa_projects <- function(grant_id = NULL, publication_id = NULL, title = NULL,
   out <- tt_GET(path = "search/projects", query = args, ...)
   res <- tt_parse(out, 'xml')
   tibble::as_tibble(
-    as.data.frame(parse_project(res), stringsAsFactors = FALSE)
+    do.call("rbind", lapply(parse_project(res), as.data.frame, 
+      stringsAsFactors = FALSE))
   )
 }
 
+xml_names <- c(
+  grantID = "//code",
+  acronym = "//acronym",
+  title = "//title",
+  startdate = "//startdate",
+  enddate = "//enddate",
+  callidentifier = "//callidentifier",
+  ecsc39 = "//ecsc39",
+  funding_level_0 = "//funding_level_0/name"
+)
+
 parse_project <- function(x) {
-  xp_queries <- c(
-    grantID = "//code",
-    acronym = "//acronym",
-    title = "//title",
-    startdate = "//startdate",
-    enddate = "//enddate",
-    callidentifier = "//callidentifier",
-    ecsc39 = "//ecsc39",
-    funding_level_0 = "//funding_level_0/name"
-  )
-  lapply(xp_queries, function(z) {
-    xml2::xml_text(xml2::xml_find_all(x, xpath = z))
+  results <- xml2::xml_find_all(x, xpath = '//results/result')
+  lapply(results, function(z) {
+    lapply(xml_names, function(w) {
+      xml2::xml_text(xml2::xml_find_first(z, w))
+    })
   })
 }
