@@ -56,6 +56,8 @@ resultacceptanceyear}
 
 \item{format}{format to return, one of json, xml, csv or tsv (default)}
 
+\item{raw}{(logical) return raw text or not. Default: \code{FALSE}}
+
 \item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
 }
 \description{

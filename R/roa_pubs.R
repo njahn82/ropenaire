@@ -12,6 +12,7 @@
 #' or equal the given date. Allowed values: date formatted as YYYY-MM-DD.
 #' @param title Publication title
 #' @param author Search for publications by authors
+#' @param raw (logical) return raw text or not. Default: `FALSE`
 #' @inheritParams roa_datasets
 #'
 #' @references OpenAIRE API docs <http://api.openaire.eu/>
