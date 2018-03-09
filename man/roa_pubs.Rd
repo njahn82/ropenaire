@@ -8,7 +8,7 @@ roa_pubs(fp7 = NULL, publication_id = NULL, dataset_id = NULL,
   doi = NULL, provider_id = NULL, project_id = NULL, has_project = NULL,
   oa = NULL, title = NULL, author = NULL, from_date = NULL,
   to_date = NULL, size = 1000, sort_by = NULL, sort_order = NULL,
-  format = "tsv", ...)
+  format = "tsv", raw = FALSE, ...)
 }
 \arguments{
 \item{fp7}{Search for publications associated to a FP7 project with the

@@ -49,9 +49,9 @@ Get EC projects
 }
 \examples{
 \dontrun{
-roa_projects(org = "UGOE", size = 10)
+roa_projects(org = "UGOE", size = 3)
 roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
-roa_projects(title = "open", size = 10)
+roa_projects(title = "open", size = 3)
 
 # curl options
 x <- roa_projects(org = "UGOE", size = 10, verbose = TRUE)

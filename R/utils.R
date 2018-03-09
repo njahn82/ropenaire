@@ -41,10 +41,21 @@ assert_args <- function(x) {
   assert_arg(x$size, c('numeric', 'integer'))
 }
 
-tt_parse <- function(x, format) {
+tt_parse <- function(x, format, raw = FALSE) {
+  if (raw) return(x$parse("UTF-8"))
   switch(
     format,
-    json = jsonlite::fromJSON(x$parse("UTF-8")),
+    json = {
+      tmp <- tryCatch(
+        jsonlite::fromJSON(x$parse("UTF-8")), 
+        error = function(e) e
+      )
+      if (inherits(tmp, "error")) {
+        stop("invalid JSON, try setting raw=TRUE")
+      } else {
+        return(tmp)
+      }
+    },
     tsv = suppressMessages(readr::read_tsv(x$content)),
     csv = suppressMessages(readr::read_csv(x$content)),
     xml = xml2::read_xml(x$content),

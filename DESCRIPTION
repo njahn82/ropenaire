@@ -6,7 +6,7 @@ Description: Client for the OpenAIRE API.
   that is it does not give direct access to publication files and it 
   does not provide access to the whole information space since the 
   number of total results returned by one query is limited to 10,000.
-Version: 0.1.4.9524
+Version: 0.1.4.9721
 Authors@R: c(
     person("Najko", "Jahn", role = c("aut", "cre"), 
       email = "najko.jahn@uni-bielefeld.de"),
