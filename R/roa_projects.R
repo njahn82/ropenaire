@@ -37,13 +37,13 @@ roa_projects <- function(grant_id = NULL, title = NULL, acronym = NULL,
   )
   if (is.null(args))
     stop("empty query")
-  out <- tt_GET(path = "search/projects", query = args) %>%
-    content  %>%
-    parse_project
+  res <- tt_GET(path = "search/projects", query = args)
+  out <- parse_project(res)
   as.data.frame(out, stringsAsFactors = FALSE)
 }
 
 parse_project <- function(x) {
+  x <- XML::xmlParse(x)
   if (is.null(x))
     stop("no xml input to parse")
   xp_queries <- c(
