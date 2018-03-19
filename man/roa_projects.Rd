@@ -6,46 +6,77 @@
 \usage{
 roa_projects(grant_id = NULL, publication_id = NULL, title = NULL,
   acronym = NULL, call_id = NULL, start_year = NULL, end_year = NULL,
-  country = NULL, org = NULL, size = 1000, sort_by = NULL,
-  sort_order = NULL, ...)
+  country = NULL, org = NULL, model = "openaire",
+  fp7_scientific_area = NULL, has_ec_funding = NULL,
+  has_wt_funding = NULL, funder = NULL, funding_stream = NULL,
+  keywords = NULL, sort_by = NULL, sort_order = NULL, size = 1000,
+  page = 1, format = "xml", ...)
 }
 \arguments{
-\item{grant_id}{Gets the project with the given grant identifier,
-if any}
+\item{grant_id}{(character) Gets the project with the given grant
+identifier, if any}
 
-\item{publication_id}{publication ID}
+\item{publication_id}{(character) publication ID}
 
-\item{title}{Name of the project}
+\item{title}{(character) Name of the project}
 
-\item{acronym}{Gets the project with the given acronym, if any.}
+\item{acronym}{(character) Gets the project with the given acronym, if any.}
 
-\item{call_id}{Search for projects by call identifier}
+\item{call_id}{(character) Search for projects by call identifier}
 
-\item{start_year}{Gets the projects that started in the given year.
+\item{start_year}{(numeric) Gets the projects that started in the given
+year. Format: YYYY}
+
+\item{end_year}{(numeric) Gets the projects that ended in the given year.
 Format: YYYY}
 
-\item{end_year}{Gets the projects that ended in the given year.
-Format: YYYY}
+\item{country}{(character) Search for projects by participant countries.
+Format: 2-letter country code}
 
-\item{country}{Search for projects by participant countries. Format:
-2-letter country code}
+\item{org}{(character) Search for projects by participant institutions
+(acronym)}
 
-\item{org}{Search for projects by participant institutions (acronym)}
+\item{model}{(character) The data model of the response. Model "sygma" 
+is a simplified version of the "openaire" model. For sygma, only the 
+xml format is available. See the relative XML schema 
+(<https://www.openaire.eu/schema/sygma/oaf_sygma_v2.1.xsd>). 
+Default: "openaire".}
 
-\item{size}{size number of records}
+\item{fp7_scientific_area}{(character) Search for FP7 entities by 
+scientific area}
 
-\item{sort_by}{sort field, one of projectstartdate, projectstartyear,
-projectenddate, projectendyear, projectduration}
+\item{has_ec_funding}{(logical) If `TRUE` gets the entities funded by the 
+EC. If `FALSE` gets the entities related to projects not funded by the EC.}
 
-\item{sort_order}{sort order. one of ascending or descending. optional}
+\item{has_wt_funding}{(logical) If `TRUE` gets the entities funded by 
+Wellcome Trust. The results are the same as those obtained with 
+`funder="wt"`. If `FALSE` gets the entities related to projects not 
+funded by Wellcome Trust.}
 
-\item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
+\item{funder}{(character) Search for entities by funder. One of WT, EC, 
+ARC, ANDS, NSF, FCT, NHMRC}
+
+\item{funding_stream}{(character) xx}
+
+\item{keywords}{(character) vector of keywords}
+
+\item{sort_by}{(character) sort field, one of projectstartdate,
+projectstartyear, projectenddate, projectendyear, projectduration}
+
+\item{sort_order}{(character) sort order. one of ascending or descending. 
+optional}
+
+\item{size}{(integer) number of records}
+
+\item{page}{(integer) page number of the search results}
+
+\item{format}{(character) format to return, one of json, xml, csv 
+or tsv (default)}
+
+\item{...}{curl options passed on to [crul::HttpClient]}
 }
 \description{
 Get EC projects
-}
-\note{
-\code{format} is hard coded to \code{xml} for now
 }
 \examples{
 \dontrun{
