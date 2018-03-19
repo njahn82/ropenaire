@@ -41,7 +41,7 @@ assert_args <- function(x) {
   assert_arg(x$size, c('numeric', 'integer'))
 }
 
-tt_parse <- function(x, format, raw = FALSE) {
+tt_parse <- function(x, format, xml_fun, raw = FALSE) {
   if (raw) return(x$parse("UTF-8"))
   switch(
     format,
@@ -58,9 +58,14 @@ tt_parse <- function(x, format, raw = FALSE) {
     },
     tsv = suppressMessages(readr::read_tsv(x$content)),
     csv = suppressMessages(readr::read_csv(x$content)),
-    xml = xml2::read_xml(x$content),
+    # xml = xml2::read_xml(x$content),
+    xml = xml_fun(x),
     stop("'format' must be of json, tsv, csv, or xml")
   )
+}
+
+xml_content <- function(x) {
+  xml2::read_xml(x$content)   
 }
 
 check_format <- function(x) {

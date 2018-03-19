@@ -7,10 +7,10 @@
 roa_datasets(fp7 = NULL, dataset_id = NULL, doi = NULL,
   provider_id = NULL, project_id = NULL, has_project = NULL, oa = NULL,
   title = NULL, author = NULL, from_date = NULL, to_date = NULL,
-  model = "openaire", fp7_scientific_area = NULL, has_ec_funding = NULL,
+  model = NULL, fp7_scientific_area = NULL, has_ec_funding = NULL,
   has_wt_funding = NULL, funder = NULL, funding_stream = NULL,
   keywords = NULL, sort_by = NULL, sort_order = NULL, size = 1000,
-  page = 1, format = "tsv", ...)
+  page = NULL, format = "tsv", ...)
 }
 \arguments{
 \item{fp7}{(character/numeric) Search for dataset associated to a FP7
@@ -49,11 +49,14 @@ YYYY-MM-DD.}
 less than or equal the given date. Allowed values: date formatted as
 YYYY-MM-DD.}
 
-\item{model}{(character) The data model of the response. Model "sygma" 
-is a simplified version of the "openaire" model. For sygma, only the 
-xml format is available. See the relative XML schema 
+\item{model}{(character) The data model of the response. Options: 
+"openaire" or "sygma". Model "sygma" is a simplified version of the 
+"openaire" model. For sygma, only the xml format is available. See 
+the relative XML schema 
 (<https://www.openaire.eu/schema/sygma/oaf_sygma_v2.1.xsd>). 
-Default: "openaire".}
+Default: "openaire". Unfortunately, passing "model=openaire" leads to
+no results AFAICT, so this parameter is left as `NULL` for now.
+If you pass `model=sygma` we force `format=xml` (see above)}
 
 \item{fp7_scientific_area}{(character) Search for FP7 entities by 
 scientific area}
@@ -97,8 +100,7 @@ to a funding stream
 \examples{
 \dontrun{
 # Search for FP7 grant-supported datasets
-res <- roa_datasets(fp7 = "247153", size = 10)
-str(res)
+roa_datasets(fp7 = "247153", size = 10)
 
 # different formats
 roa_datasets(title = "methane", size = 3, format = "json")

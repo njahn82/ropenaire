@@ -8,7 +8,7 @@ test_that("roa_projects returns correct class", {
   expect_is(a, "data.frame")
   expect_is(a, "tbl_df")
   expect_is(a$grantID, "character")
-  expect_equal(NROW(a), 5) 
+  expect_gt(NROW(a), 10) 
 })
 
 test_that("roa_projects fails well", {

@@ -6,11 +6,10 @@
 \usage{
 roa_projects(grant_id = NULL, publication_id = NULL, title = NULL,
   acronym = NULL, call_id = NULL, start_year = NULL, end_year = NULL,
-  country = NULL, org = NULL, model = "openaire",
-  fp7_scientific_area = NULL, has_ec_funding = NULL,
-  has_wt_funding = NULL, funder = NULL, funding_stream = NULL,
-  keywords = NULL, sort_by = NULL, sort_order = NULL, size = 1000,
-  page = 1, format = "xml", ...)
+  country = NULL, org = NULL, model = NULL, fp7_scientific_area = NULL,
+  has_ec_funding = NULL, has_wt_funding = NULL, funder = NULL,
+  funding_stream = NULL, keywords = NULL, sort_by = NULL,
+  sort_order = NULL, size = 1000, page = NULL, format = "xml", ...)
 }
 \arguments{
 \item{grant_id}{(character) Gets the project with the given grant
@@ -36,11 +35,14 @@ Format: 2-letter country code}
 \item{org}{(character) Search for projects by participant institutions
 (acronym)}
 
-\item{model}{(character) The data model of the response. Model "sygma" 
-is a simplified version of the "openaire" model. For sygma, only the 
-xml format is available. See the relative XML schema 
+\item{model}{(character) The data model of the response. Options: 
+"openaire" or "sygma". Model "sygma" is a simplified version of the 
+"openaire" model. For sygma, only the xml format is available. See 
+the relative XML schema 
 (<https://www.openaire.eu/schema/sygma/oaf_sygma_v2.1.xsd>). 
-Default: "openaire".}
+Default: "openaire". Unfortunately, passing "model=openaire" leads to
+no results AFAICT, so this parameter is left as `NULL` for now.
+If you pass `model=sygma` we force `format=xml` (see above)}
 
 \item{fp7_scientific_area}{(character) Search for FP7 entities by 
 scientific area}
@@ -83,6 +85,11 @@ Get EC projects
 roa_projects(org = "UGOE", size = 3)
 roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
 roa_projects(title = "open", size = 3)
+
+# formats
+roa_projects(org = "UGOE", size = 3, format = "tsv")
+roa_projects(org = "UGOE", size = 3, format = "csv")
+roa_projects(org = "UGOE", size = 3, format = "json")
 
 # curl options
 x <- roa_projects(org = "UGOE", size = 10, verbose = TRUE)

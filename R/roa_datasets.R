@@ -88,5 +88,5 @@ roa_datasets <- function(fp7 = NULL, dataset_id = NULL, doi = NULL,
   ))
   assert_args(args)
   out <- tt_GET(path = "search/datasets", query = args, ...)
-  tt_parse(out, format)
+  tt_parse(out, format, xml_content)
 }

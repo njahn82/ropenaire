@@ -26,6 +26,11 @@
 #' roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
 #' roa_projects(title = "open", size = 3)
 #' 
+#' # formats
+#' roa_projects(org = "UGOE", size = 3, format = "tsv")
+#' roa_projects(org = "UGOE", size = 3, format = "csv")
+#' roa_projects(org = "UGOE", size = 3, format = "json")
+#' 
 #' # curl options
 #' x <- roa_projects(org = "UGOE", size = 10, verbose = TRUE)
 #' }
@@ -34,7 +39,7 @@ roa_projects <- function(grant_id = NULL, publication_id = NULL, title = NULL,
   country = NULL, org = NULL, model = NULL, fp7_scientific_area = NULL, 
   has_ec_funding = NULL, has_wt_funding = NULL, funder = NULL, 
   funding_stream = NULL, keywords = NULL, sort_by = NULL, sort_order = NULL, 
-  size = 1000, page = 1, format = "xml", ...) {
+  size = 1000, page = NULL, format = "xml", ...) {
   
   if (!is.null(sort_order)) {
     if (!is.null(sort_by)) {
@@ -53,11 +58,7 @@ roa_projects <- function(grant_id = NULL, publication_id = NULL, title = NULL,
     format = format))
   assert_args(args)
   out <- tt_GET(path = "search/projects", query = args, ...)
-  res <- tt_parse(out, 'xml')
-  tibble::as_tibble(
-    do.call("rbind", lapply(parse_project(res), as.data.frame, 
-      stringsAsFactors = FALSE))
-  )
+  tt_parse(out, format, xml_project)
 }
 
 xml_names <- c(
@@ -72,10 +73,19 @@ xml_names <- c(
 )
 
 parse_project <- function(x) {
+  x <- xml2::read_xml(x$content)
   results <- xml2::xml_find_all(x, xpath = '//results/result')
   lapply(results, function(z) {
     lapply(xml_names, function(w) {
-      xml2::xml_text(xml2::xml_find_first(z, w))
+      xml2::xml_text(xml2::xml_find_all(z, w))
     })
   })
 }
+
+xml_project <- function(x) {
+  tibble::as_tibble(
+    do.call("rbind", lapply(parse_project(x), as.data.frame, 
+      stringsAsFactors = FALSE))
+  )
+}
+

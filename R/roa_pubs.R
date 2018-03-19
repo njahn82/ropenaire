@@ -95,5 +95,5 @@ roa_pubs <- function(fp7 = NULL, publication_id = NULL, doi = NULL,
   ))
   assert_args(args)
   out <- tt_GET(path = "search/publications", query = args, ...)
-  tt_parse(out, format, raw)
+  tt_parse(out, format, xml_content, raw)
 }

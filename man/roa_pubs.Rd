@@ -7,7 +7,7 @@
 roa_pubs(fp7 = NULL, publication_id = NULL, doi = NULL,
   provider_id = NULL, project_id = NULL, has_project = NULL, oa = NULL,
   title = NULL, author = NULL, from_date = NULL, to_date = NULL,
-  model = "openaire", fp7_scientific_area = NULL, has_ec_funding = NULL,
+  model = NULL, fp7_scientific_area = NULL, has_ec_funding = NULL,
   has_wt_funding = NULL, funder = NULL, funding_stream = NULL,
   keywords = NULL, size = 1000, page = 1, sort_by = NULL,
   sort_order = NULL, format = "tsv", raw = FALSE, ...)
@@ -49,11 +49,14 @@ YYYY-MM-DD.}
 is less than or equal the given date. Allowed values: date formatted as
 YYYY-MM-DD.}
 
-\item{model}{(character) The data model of the response. Model "sygma" 
-is a simplified version of the "openaire" model. For sygma, only the 
-xml format is available. See the relative XML schema 
+\item{model}{(character) The data model of the response. Options: 
+"openaire" or "sygma". Model "sygma" is a simplified version of the 
+"openaire" model. For sygma, only the xml format is available. See 
+the relative XML schema 
 (<https://www.openaire.eu/schema/sygma/oaf_sygma_v2.1.xsd>). 
-Default: "openaire".}
+Default: "openaire". Unfortunately, passing "model=openaire" leads to
+no results AFAICT, so this parameter is left as `NULL` for now.
+If you pass `model=sygma` we force `format=xml` (see above)}
 
 \item{fp7_scientific_area}{(character) Search for FP7 entities by 
 scientific area}
