@@ -10,10 +10,11 @@
 #' identifier. Alternatevely, it is possible to repeat the parameter for each 
 #' provider id. In both cases, provider identifiers will form a query with OR 
 #' semantics.
-#' @param project_id (character) Search for publications by openaire project 
+#' @param openaire_project_id (character) Search for publications by openaire project 
 #' identifier. Alternatevely, it is possible to repeat the parameter for each 
 #' provider id. In both cases, provider identifiers will form a query with OR 
 #' semantics.
+#' @param project_id (character) The given grant identifier of the project.
 #' @param has_project (logical) If hasProject is true gets the datasets that 
 #' have a link to a project. If hasProject is false gets the datasets with no 
 #' links to projects.
@@ -46,9 +47,6 @@
 #' # Search by doi
 #' roa_pubs(doi = "10.1051/0004-6361/201220935")
 #' 
-#' # provider id
-#' # roa_pubs(provider_id = )
-#' 
 #' # project id
 #' # roa_pubs(project_id = )
 #' 
@@ -64,9 +62,9 @@
 #' x <- roa_pubs(doi = "10.1051/0004-6361/201220935", verbose = TRUE)
 #' }
 roa_pubs <- function(fp7 = NULL, publication_id = NULL, doi = NULL, 
-  provider_id = NULL, project_id = NULL, has_project = NULL, 
-  oa = NULL, title = NULL, author = NULL, from_date = NULL, 
-  to_date = NULL, model = NULL, fp7_scientific_area = NULL, 
+  provider_id = NULL, project_id = NULL, openaire_project_id = NULL, 
+  has_project = NULL, oa = NULL, title = NULL, author = NULL, 
+  from_date = NULL,  to_date = NULL, model = NULL, fp7_scientific_area = NULL, 
   has_ec_funding = NULL, has_wt_funding = NULL, funder = NULL, 
   funding_stream = NULL, keywords = NULL, size = 1000, page = 1, 
   sort_by = NULL, sort_order = NULL, 
@@ -83,7 +81,8 @@ roa_pubs <- function(fp7 = NULL, publication_id = NULL, doi = NULL,
   args <- comp(list(
     FP7ProjectID = fp7, openairePublicationID = publication_id,
     doi = doi, openaireProviderID = provider_id,
-    openaireProjectID = project_id, title = title,
+    projectID = project_id, openaireProjectID = openaire_project_id, 
+    title = title,
     author = author, hasProject = has_project,
     OA = oa, fromDateAccepted = from_date,
     toDateAccepted = to_date, model = model,

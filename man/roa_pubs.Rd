@@ -5,9 +5,10 @@
 \title{Search FP7 publications}
 \usage{
 roa_pubs(fp7 = NULL, publication_id = NULL, doi = NULL,
-  provider_id = NULL, project_id = NULL, has_project = NULL, oa = NULL,
-  title = NULL, author = NULL, from_date = NULL, to_date = NULL,
-  model = NULL, fp7_scientific_area = NULL, has_ec_funding = NULL,
+  provider_id = NULL, project_id = NULL, openaire_project_id = NULL,
+  has_project = NULL, oa = NULL, title = NULL, author = NULL,
+  from_date = NULL, to_date = NULL, model = NULL,
+  fp7_scientific_area = NULL, has_ec_funding = NULL,
   has_wt_funding = NULL, funder = NULL, funding_stream = NULL,
   keywords = NULL, size = 1000, page = 1, sort_by = NULL,
   sort_order = NULL, format = "tsv", raw = FALSE, ...)
@@ -26,7 +27,9 @@ identifier. Alternatevely, it is possible to repeat the parameter for each
 provider id. In both cases, provider identifiers will form a query with OR
 semantics.}
 
-\item{project_id}{(character) Search for publications by openaire project
+\item{project_id}{(character) The given grant identifier of the project.}
+
+\item{openaire_project_id}{(character) Search for publications by openaire project
 identifier. Alternatevely, it is possible to repeat the parameter for each
 provider id. In both cases, provider identifiers will form a query with OR
 semantics.}
@@ -109,9 +112,6 @@ table(my_pubs$Access)
 
 # Search by doi
 roa_pubs(doi = "10.1051/0004-6361/201220935")
-
-# provider id
-# roa_pubs(provider_id = )
 
 # project id
 # roa_pubs(project_id = )
