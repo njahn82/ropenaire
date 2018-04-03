@@ -4,18 +4,22 @@
 \alias{roa_projects}
 \title{Get EC projects}
 \usage{
-roa_projects(grant_id = NULL, publication_id = NULL, title = NULL,
-  acronym = NULL, call_id = NULL, start_year = NULL, end_year = NULL,
-  country = NULL, org = NULL, model = NULL, fp7_scientific_area = NULL,
-  has_ec_funding = NULL, has_wt_funding = NULL, funder = NULL,
-  funding_stream = NULL, keywords = NULL, sort_by = NULL,
-  sort_order = NULL, size = 1000, page = NULL, format = "xml", ...)
+roa_projects(grant_id = NULL, publication_id = NULL, dataset_id = NULL,
+  title = NULL, acronym = NULL, call_id = NULL, start_year = NULL,
+  end_year = NULL, country = NULL, org = NULL, model = NULL,
+  fp7_scientific_area = NULL, has_ec_funding = NULL,
+  has_wt_funding = NULL, funder = NULL, funding_stream = NULL,
+  keywords = NULL, sort_by = NULL, sort_order = NULL, size = 1000,
+  page = NULL, format = "xml", ...)
 }
 \arguments{
 \item{grant_id}{(character) Gets the project with the given grant
 identifier, if any}
 
 \item{publication_id}{(character) publication ID}
+
+\item{dataset_id}{Gets the dataset with the given openaire identifier,
+if any}
 
 \item{title}{(character) Name of the project}
 
@@ -85,6 +89,8 @@ Get EC projects
 roa_projects(org = "UGOE", size = 3)
 roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
 roa_projects(title = "open", size = 3)
+
+roa_projects(dataset_id = "")
 
 # formats
 roa_projects(org = "UGOE", size = 3, format = "tsv")
