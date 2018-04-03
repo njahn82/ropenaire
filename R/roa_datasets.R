@@ -14,10 +14,11 @@
 #' identifier. Alternatevely, it is possible to repeat the parameter for each 
 #' provider id. In both cases, provider identifiers will form a query with OR 
 #' semantics.
-#' @param project_id (character) Search for publications by openaire project 
+#' @param openaire_project_id (character) Search for publications by openaire project 
 #' identifier. Alternatevely, it is possible to repeat the parameter for each 
 #' provider id. In both cases, provider identifiers will form a query with OR 
 #' semantics.
+#' @param project_id (character) The given grant identifier of the project.
 #' @param has_project (logical) If hasProject is true gets the datasets that 
 #' have a link to a project. If hasProject is false gets the datasets with no 
 #' links to projects.
@@ -58,7 +59,8 @@
 #' res <- roa_datasets(fp7 = "247153", size = 3, verbose = TRUE)
 #' }
 roa_datasets <- function(fp7 = NULL, dataset_id = NULL, doi = NULL,
-  provider_id = NULL, project_id = NULL, has_project = NULL, oa = NULL,
+  provider_id = NULL, project_id = NULL, openaire_project_id = NULL, 
+  has_project = NULL, oa = NULL,
   title = NULL, author = NULL, from_date = NULL, to_date = NULL, 
   model = NULL, fp7_scientific_area = NULL, has_ec_funding = NULL, 
   has_wt_funding = NULL, funder = NULL, funding_stream = NULL, 
@@ -76,8 +78,8 @@ roa_datasets <- function(fp7 = NULL, dataset_id = NULL, doi = NULL,
   args <- comp(list(
     FP7ProjectID = fp7, openaireDatasetID = dataset_id,
     doi = doi, openaireProviderID = provider_id,
-    openaireProjectID = project_id, title = title,
-    author = author, hasProject = has_project,
+    projectID = project_id, openaireProjectID = openaire_project_id, 
+    title = title, author = author, hasProject = has_project,
     OA = oa, fromDateAccepted = from_date,
     toDateAccepted = to_date, model = model,
     FP7scientificArea = fp7_scientific_area, 
