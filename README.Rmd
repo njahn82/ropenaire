@@ -9,9 +9,9 @@ knitr::opts_chunk$set(
 
 # ropenaire
 
-[![Build Status](https://travis-ci.org/njahn82/ropenaire.svg?branch=master)](https://travis-ci.org/njahn82/ropenaire)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/njahn82/ropenaire?branch=master)](https://ci.appveyor.com/project/njahn82/ropenaire)
-[![codecov.io](http://codecov.io/github/njahn82/ropenaire/coverage.svg?branch=master)](http://codecov.io/github/njahn82/ropenaire?branch=master)
+[![Build Status](https://travis-ci.org/sckott/ropenaire.svg?branch=master)](https://travis-ci.org/sckott/ropenaire)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/sckott/ropenaire?branch=master)](https://ci.appveyor.com/project/sckott/ropenaire)
+[![codecov.io](http://codecov.io/github/sckott/ropenaire/coverage.svg?branch=master)](http://codecov.io/github/sckott/ropenaire?branch=master)
 
 ## About
 
@@ -24,7 +24,7 @@ For bulk access, please use the [OpenAIRE OAI-PMH endpoint](http://api.openaire.
 ## Installation from GitHub
 
 ```{r, eval=FALSE}
-devtools::install_github("njahn82/ropenaire")
+devtools::install_github("sckott/ropenaire")
 ```
 
 Load `ropenaire`
@@ -40,15 +40,13 @@ library(ropenaire)
 Search for EC-funded projects by participating institution. For example, Göttingen University has the acronym `GOE`
 
 ```{r}
-roa_projects(org = "UGOE") %>%
-  head()
+roa_projects(org = "UGOE", size = 10)
 ```
 
 Search projects by call id
 
 ```{r}
-roa_projects(call_id = "FP7-PEOPLE-2013-IOF") %>%
-  head()
+roa_projects(call_id = "FP7-PEOPLE-2013-IOF", size = 10)
 ```
 
 
@@ -57,8 +55,7 @@ roa_projects(call_id = "FP7-PEOPLE-2013-IOF") %>%
 Publications from the 2nd-Generation Open Access Infrastructure for Research in Europe project, which has the grant id 283595.
 
 ```{r}
-roa_pubs(fp7 = "283595") %>%
-  head() 
+roa_pubs(fp7 = "283595", size = 10)
 ```
 
 ### Datasets
@@ -66,29 +63,22 @@ roa_pubs(fp7 = "283595") %>%
 Search for FP7 grant-supported datasets
 
 ```{r}
-roa_datasets(fp7 = "247153") %>%
-  head()
+roa_datasets(fp7 = "247153", size = 10)
 ```
 
 Search by title keywords
 
 ```{r}
-roa_datasets(title = "methane") %>%
-  head()
-
+roa_datasets(title = "methane", size = 10)
 ```
 
 ### Get all the FP7-supported publications from a participating institution 
 
 ```{r}
-ugoe <- roa_projects(org = "UGOE")
-plyr::ldply(ugoe$grantID, roa_pubs) %>%
-  head()
+roa_projects(org = "UGOE", size = 10)
 ```
 
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/njahn82/ropenaire/issues).
 * License: MIT ©Najko Jahn
-
-

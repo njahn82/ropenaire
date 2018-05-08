@@ -2,9 +2,9 @@
 
 # ropenaire
 
-[![Build Status](https://travis-ci.org/njahn82/ropenaire.svg?branch=master)](https://travis-ci.org/njahn82/ropenaire)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/njahn82/ropenaire?branch=master)](https://ci.appveyor.com/project/njahn82/ropenaire)
-[![codecov.io](http://codecov.io/github/njahn82/ropenaire/coverage.svg?branch=master)](http://codecov.io/github/njahn82/ropenaire?branch=master)
+[![Build Status](https://travis-ci.org/sckott/ropenaire.svg?branch=master)](https://travis-ci.org/sckott/ropenaire)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/sckott/ropenaire?branch=master)](https://ci.appveyor.com/project/sckott/ropenaire)
+[![codecov.io](http://codecov.io/github/sckott/ropenaire/coverage.svg?branch=master)](http://codecov.io/github/sckott/ropenaire?branch=master)
 
 ## About
 
@@ -18,7 +18,7 @@ For bulk access, please use the [OpenAIRE OAI-PMH endpoint](http://api.openaire.
 
 
 ```r
-devtools::install_github("njahn82/ropenaire")
+devtools::install_github("sckott/ropenaire")
 ```
 
 Load `ropenaire`
@@ -36,58 +36,42 @@ Search for EC-funded projects by participating institution. For example, Göttin
 
 
 ```r
-roa_projects(org = "UGOE") %>%
-  head()
-#>   grantID              acronym
-#> 1  258713               ANTHOS
-#> 2  275542            MUSTERMAN
-#> 3  340528   CELLMECHANOCONTROL
-#> 4  332136               HYDRON
-#> 5  627266        ALGAEOILSYNTH
-#> 6  279347 WAVELENGTH STANDARDS
-#>                                                                                                                title
-#> 1                                                                    Analytic Number Theory: Higher Order Structures
-#> 2                                                               Music, Terror and Manipulation under the Greek Junta
-#> 3                                                    The physical basis of cellular mechanochemical control circuits
-#> 4                                                                  Near Hydrodynamic Type Systems in 2 +1 Dimensions
-#> 5 Towards improving biofuel production - Oil synthesis and accumulation pathways in promising oleaginous microalgae.
-#> 6                                        Development of new wavelength standards for the searchfor habitable planets
-#>    startdate    enddate        callidentifier ecsc39
-#> 1 2010-10-01 2015-09-30 ERC-2010-StG_20091028  false
-#> 2 2011-06-15 2014-06-20   FP7-PEOPLE-2010-IEF  false
-#> 3 2014-06-01 2019-05-31          ERC-2013-ADG  false
-#> 4 2013-06-01 2015-05-31   FP7-PEOPLE-2012-IEF  false
-#> 5 2014-05-01 2017-04-30   FP7-PEOPLE-2013-IOF  false
-#> 6 2012-01-01 2016-12-31 ERC-2011-StG_20101014  false
+roa_projects(org = "UGOE", size = 10)
+#> # A tibble: 10 x 8
+#>    grantID acronym  title          startdate enddate callidentifier ecsc39
+#>    <chr>   <chr>    <chr>          <chr>     <chr>   <chr>          <chr> 
+#>  1 648329  GRANT    Groups, Repre… 2015-09-… 2020-0… ERC-2014-CoG   ""    
+#>  2 693457  Private… Private Pieti… 2016-10-… 2021-0… ERC-2015-AdG   ""    
+#>  3 707072  MARDIV   'Marriage and… 2016-09-… 2018-0… H2020-MSCA-IF… ""    
+#>  4 258713  ANTHOS   Analytic Numb… 2010-10-… 2015-0… ERC-2010-StG_… false 
+#>  5 771295  SULFOSOL Sulfur-based … 2018-05-… 2023-0… ERC-2017-COG   ""    
+#>  6 646747  N2FEED   N2 as Chemica… 2015-06-… 2020-0… ERC-2014-CoG   ""    
+#>  7 750249  AGG-RES… Let restore o… 2017-06-… 2019-0… H2020-MSCA-IF… ""    
+#>  8 639119  ULEED    Observing str… 2015-03-… 2020-0… ERC-2014-STG   ""    
+#>  9 752533  UCHIRAL  Ultrafast opt… 2017-07-… 2019-0… H2020-MSCA-IF… ""    
+#> 10 275542  MUSTERM… Music, Terror… 2011-06-… 2014-0… FP7-PEOPLE-20… false 
+#> # ... with 1 more variable: funding_level_0 <chr>
 ```
 
 Search projects by call id
 
 
 ```r
-roa_projects(call_id = "FP7-PEOPLE-2013-IOF") %>%
-  head()
-#>   grantID  acronym
-#> 1  622936   SEXSEL
-#> 2  627781      AWE
-#> 3  622974 TELESTES
-#> 4  627639  BIOHELP
-#> 5  624040   MAREST
-#> 6  624968     TPAB
-#>                                                                                          title
-#> 1 Investigating the joint role of balancing and positive selection in mating systems evolution
-#> 2                       Accurate Waveforms for Extreme/Intermediate-mass-ratio-inspirals (AWE)
-#> 3                                TELESTES. Musics, cults and rites of a Greek city in the West
-#> 4   Revealing the hidden secrets of the MEP pathway to engineer new bio-resources for humanity
-#> 5                                                      Marine Ecosystem Stability and Turnover
-#> 6                                                   Toward a Phenomenology of the Anxious Body
-#>    startdate    enddate      callidentifier ecsc39
-#> 1 2014-07-01 2017-06-30 FP7-PEOPLE-2013-IOF  false
-#> 2 2014-10-01 2017-09-30 FP7-PEOPLE-2013-IOF  false
-#> 3 2014-03-01 2017-02-28 FP7-PEOPLE-2013-IOF  false
-#> 4 2014-09-01 2017-08-31 FP7-PEOPLE-2013-IOF  false
-#> 5 2015-01-01 2017-12-31 FP7-PEOPLE-2013-IOF  false
-#> 6 2014-10-01 2017-09-30 FP7-PEOPLE-2013-IOF  false
+roa_projects(call_id = "FP7-PEOPLE-2013-IOF", size = 10)
+#> # A tibble: 10 x 8
+#>    grantID acronym  title          startdate enddate callidentifier ecsc39
+#>    <chr>   <chr>    <chr>          <chr>     <chr>   <chr>          <chr> 
+#>  1 623673  REPRODU… Historicizing… 2015-05-… 2018-0… FP7-PEOPLE-20… false 
+#>  2 623324  EVOLINE  Mobile elemen… 2015-02-… 2019-0… FP7-PEOPLE-20… false 
+#>  3 627781  AWE      Accurate Wave… 2014-10-… 2017-0… FP7-PEOPLE-20… false 
+#>  4 624968  TPAB     Toward a Phen… 2014-10-… 2017-0… FP7-PEOPLE-20… false 
+#>  5 622936  SEXSEL   Investigating… 2014-07-… 2017-0… FP7-PEOPLE-20… false 
+#>  6 627639  BIOHELP  Revealing the… 2014-09-… 2018-0… FP7-PEOPLE-20… false 
+#>  7 628785  ISCOBRA  Global challe… 2014-07-… 2016-0… FP7-PEOPLE-20… false 
+#>  8 622331  CREA.TA  Schemata Viol… 2014-09-… 2017-0… FP7-PEOPLE-20… false 
+#>  9 629861  SOX      The role of S… 2015-04-… 2018-0… FP7-PEOPLE-20… false 
+#> 10 622294  PREVASC… Engineering a… 2014-08-… 2017-0… FP7-PEOPLE-20… false 
+#> # ... with 1 more variable: funding_level_0 <chr>
 ```
 
 
@@ -97,57 +81,22 @@ Publications from the 2nd-Generation Open Access Infrastructure for Research in 
 
 
 ```r
-roa_pubs(fp7 = "283595") %>%
-  head() 
-#>                                                                                                                                        Title
-#> 1                                                                          ZENODO: A New Innovative Service for Sharing All Research Outputs
-#> 2 Open Access to Scientific Results and Data. European Union's Efforts through Openaire and Openaireplus FP7 Projects: Cypriot Participation
-#> 3                                                                                              OpenAIRE's perspective and involvement in RDA
-#> 4                                                                   Sfide tecnologiche per l'accesso aperto a tutti i prodotti della ricerca
-#> 5                                                                                                      OpenAIREplus project Executive Report
-#> 6                                   Zeleno, što volim zeleno - samoarhiviranje znanstvenih članaka kao način ostvarivanja otvorenog pristupa
-#>                                                 Authors Publication.Year
-#> 1                                    Nielsen, Lars Holm       2014-06-20
-#> 2 Tsimpoglou, F. Ch Koukounidou, V. V. Prokopiou, L. A.       2012-10-29
-#> 3                                   Castelli, Donatella       2012-01-01
-#> 4                                         Manghi, Paolo       2014-01-01
-#> 5         Rettberg, Najla Manola, Natalia Manghi, Paolo       2015-02-17
-#> 6                                          Macan, Bojan                 
-#>                         DOI
-#> 1      10.5281/zenodo.11082
-#> 2 10.1260/2047-4970.1.0.113
-#> 3                          
-#> 4                          
-#> 5      10.5281/zenodo.15464
-#> 6                          
-#>                                                            Permanent.identifier
-#> 1                                                http://zenodo.org/record/11082
-#> 2                                              http://hdl.handle.net/10797/6080
-#> 3 http://puma.isti.cnr.it/dfdownloadnew.php?ident=cnr.isti/cnr.isti/2012-A3-015
-#> 4 http://puma.isti.cnr.it/dfdownloadnew.php?ident=cnr.isti/cnr.isti/2014-B0-002
-#> 5                                                http://zenodo.org/record/15464
-#> 6                                                     http://fulir.irb.hr/1367/
-#>    Publication.type
-#> 1           Article
-#> 2 Conference object
-#> 3 Conference object
-#> 4           Article
-#> 5           Article
-#> 6           Unknown
-#>                                                                             Journal
-#> 1                                                                                  
-#> 2                                                                                  
-#> 3               In: OpenAIRE Conference (Goettingen, Germany, 21-22 November 2012).
-#> 4 In: Biliotime, vol. 17 (3) article n. 4. Associazione Italiana Biblioteche, 2014.
-#> 5                                                                                  
-#> 6                                                                                  
-#>   Project.Name..GA.Number. Access
-#> 1     OPENAIREPLUS(283595)   OPEN
-#> 2     OPENAIREPLUS(283595)   OPEN
-#> 3     OPENAIREPLUS(283595)   OPEN
-#> 4     OPENAIREPLUS(283595)   OPEN
-#> 5     OPENAIREPLUS(283595)   OPEN
-#> 6     OPENAIREPLUS(283595)   OPEN
+roa_pubs(fp7 = "283595", size = 10)
+#> # A tibble: 10 x 10
+#>    Title  Authors  `Publication Ye… DOI   `Download From` `Publication ty…
+#>    <chr>  <chr>    <date>           <chr> <chr>           <chr>           
+#>  1 ZENOD… Nielsen… 2014-06-20       10.5… https://zenodo… Lecture         
+#>  2 Infra… Príncip… 2014-12-19       <NA>  http://www.bad… Article         
+#>  3 Open … Tsimpog… 2012-10-29       10.1… http://hdl.han… Conference obje…
+#>  4 OpenA… Príncip… 2014-05-05       10.1… http://dx.doi.… Article         
+#>  5 The e… Schmidt… 2013-01-01       <NA>  http://hdl.han… Conference obje…
+#>  6 Sfide… Manghi,… 2014-01-01       <NA>  http://puma.is… Article         
+#>  7 Zelen… Macan, … NA               <NA>  http://fulir.i… Other           
+#>  8 OpenA… Manola,… 2015-02-17       10.5… https://zenodo… Report          
+#>  9 OpenA… Castell… 2012-01-01       <NA>  http://puma.is… Conference obje…
+#> 10 Zenod… Nielsen… 2014-10-27       10.5… https://zenodo… Lecture         
+#> # ... with 4 more variables: Journal <chr>, Funder <chr>, `Project Name
+#> #   (GA Number)` <chr>, Access <chr>
 ```
 
 ### Datasets
@@ -156,156 +105,68 @@ Search for FP7 grant-supported datasets
 
 
 ```r
-roa_datasets(fp7 = "247153") %>%
-  head()
-#>                                                                                                                                                Title
-#> 1                                                      Turnover of microbial lipids in the deep biosphere and growth of benthic archaeal populations
-#> 2                                                     Carbon isotope fractionation by the marine ammonia-oxidizing archaeon Nitrosopumilus maritimus
-#> 3       Thermococcus kodakarensis modulates its polar membrane lipids and elemental composition according to growth stage and phosphate availability
-#> 4                                                      Isoprenoid glycerol dialkanol diethers: a series of novel archaeal lipids in marine sediments
-#> 5 Extending the known range of glycerol ether lipids in the environment: structural assignments based on tandem mass spectral fragmentation patterns
-#> 6      Mono- and dihydroxyl glycerol dibiphytanyl glycerol tetraethers in marine sediments: Identification of both core and intact polar lipid forms
-#>                                                                                              Authors
-#> 1                 Xie, Sitan Ferdelman, Timothy G. Lipp, Julius S. Wegener, Gunter Hinrichs, Kai-uwe
-#> 2                                                   Hinrichs, Kai-uwe Könneke, Martin Lipp, Julius S.
-#> 3                                                                         EmmaJ.Gagen TravisB.Meador
-#> 4                  Lipp, Julius S. Schröder, Jan M. Summons, Roger E. Hinrichs, Kai-uwe Liu, Xiao-lei
-#> 5                                                  Hinrichs, Kai-uwe Liu, Xiao-lei Summons, Roger E.
-#> 6 Simpson, Jeffrey H. Summons, Roger E. Liu, Xiao-lei Hinrichs, Kai-uwe Lipp, Julius S. Lin, Yu-shih
-#>   Publication.Year                                                   DOI
-#> 1       2013-01-01                               10.1073/pnas.1218569110
-#> 2       2012-05-03                      10.1016/j.orggeochem.2012.04.007
-#> 3       2014-01-01 10.3389/fmicb.2014.00010/full10.3389/fmicb.2014.00010
-#> 4       2011-11-17                      10.1016/j.orggeochem.2011.11.002
-#> 5       2012-09-04                                      10.1002/rcm.6355
-#> 6       2012-04-28                             10.1016/j.gca.2012.04.053
-#>                       Permanent.identifier Publication.type
-#> 1 http://europepmc.org/articles/PMC3625344          Article
-#> 2           http://zenodo.org/record/18408          Article
-#> 3 http://europepmc.org/articles/PMC3906577          Article
-#> 4           http://zenodo.org/record/18313          Article
-#> 5           http://zenodo.org/record/18136          Article
-#> 6           http://zenodo.org/record/18312          Article
-#>                                                                                 Journal
-#> 1                                                                                      
-#> 2                                             Organic Geochemistry: 48 (2012) pp. 21-24
-#> 3                                               Frontiers in Microbiology, Vol 5 (2014)
-#> 4                                             Organic Geochemistry: 43 (2011) pp. 50-55
-#> 5                    Rapid Communications in Mass Spectrometry: 26 (2012) pp. 2295-2302
-#> 6 Geochimica et Cosmochimica Acta: 89 (2012) pp. 102-115Geochimica et Cosmochimica Acta
-#>   Project.Name..GA.Number. Access
-#> 1         DARCLIFE(247153)   OPEN
-#> 2         DARCLIFE(247153)   OPEN
-#> 3         DARCLIFE(247153)   OPEN
-#> 4         DARCLIFE(247153)   OPEN
-#> 5         DARCLIFE(247153)   OPEN
-#> 6         DARCLIFE(247153)   OPEN
+roa_datasets(fp7 = "247153", size = 10)
+#> # A tibble: 10 x 10
+#>    Title   Authors `Publication Ye… DOI   `Download From` `Publication ty…
+#>    <chr>   <chr>   <date>           <chr> <chr>           <chr>           
+#>  1 Pore w… Matthi… 2012-01-01       doi:… http://dx.doi.… Dataset         
+#>  2 Porosi… Verena… 2014-01-01       doi:… http://dx.doi.… Dataset         
+#>  3 Water … Tobias… 2015-01-01       10.1… http://dx.doi.… Dataset         
+#>  4 Concen… Verena… 2014-01-01       doi:… http://dx.doi.… Dataset         
+#>  5 Non-is… Jan Ma… 2015-01-01       10.1… http://dx.doi.… Dataset         
+#>  6 Ph and… Matthi… 2012-01-01       10.1… http://dx.doi.… Dataset         
+#>  7 Concen… Verena… 2014-01-01       10.1… http://dx.doi.… Dataset         
+#>  8 Concen… Verena… 2014-01-01       doi:… http://dx.doi.… Dataset         
+#>  9 Concen… Verena… 2014-01-01       doi:… http://dx.doi.… Dataset         
+#> 10 Concen… Verena… 2014-01-01       doi:… http://dx.doi.… Dataset         
+#> # ... with 4 more variables: Journal <chr>, Funder <chr>, `Project Name
+#> #   (GA Number)` <chr>, Access <chr>
 ```
 
 Search by title keywords
 
 
 ```r
-roa_datasets(title = "methane") %>%
-  head()
-#>                                                                                               Title
-#> 1                                                                                 Methane uncovered
-#> 2                                                                                Geological Methane
-#> 3                                                                                       Dam methane
-#> 4                                                                                  Breaking methane
-#> 5 Bio-methane & Bio-hydrogen. Status and perspectives of biological methane and hydrogen production
-#> 6                            Methane (CH<sub>4</sub>) flux data for Moidach More. Years 1997 - 1998
-#>                                                      Authors
-#> 1 Etiope, G. Istituto Nazionale Di Geofisica E. Vulcanologia
-#> 2 Etiope, G. Istituto Nazionale Di Geofisica E. Vulcanologia
-#> 3                                      Isgtw, Editorial Team
-#> 4                                         Rosenzweig, Amy C.
-#> 5                          Wijffels, R. H. Janssen, M. G. J.
-#> 6                                             Gauci, Vincent
-#>   Publication.Year                 DOI
-#> 1       2012-06-01    10.1038/ngeo1483
-#> 2       2010-01-01                    
-#> 3                                     
-#> 4       2015-01-21 10.1038/nature14199
-#> 5       2003-01-01                    
-#> 6       2008-01-01                    
-#>                                                                                                   Permanent.identifier
-#> 1                                                                                      http://hdl.handle.net/2122/8629
-#> 2                                                                                      http://hdl.handle.net/2122/6492
-#> 3 http://belief-dl.research-infrastructures.eu/UIMain.jsp?handle=isgtw.org/iSGTW_2011_RGFtbWV0aGFuZQ==&view=&version=1
-#> 4                                                                             http://europepmc.org/articles/PMC4336217
-#> 5                                                                                           http://edepot.wur.nl/87576
-#> 6                                                                                         http://oro.open.ac.uk/25665/
-#>                  Publication.type Journal Project.Name..GA.Number.
-#> 1                         Article                                 
-#> 2 Part of book or chapter of book                                 
-#> 3                         Unknown                                 
-#> 4                         Article                                 
-#> 5 Part of book or chapter of book                                 
-#> 6                         Unknown                                 
-#>       Access
-#> 1 RESTRICTED
-#> 2 RESTRICTED
-#> 3       OPEN
-#> 4       OPEN
-#> 5       OPEN
-#> 6       OPEN
+roa_datasets(title = "methane", size = 10)
+#> # A tibble: 10 x 10
+#>    Title  Authors  `Publication Ye… DOI   `Download From` `Publication ty…
+#>    <chr>  <chr>    <date>           <chr> <chr>           <chr>           
+#>  1 METHA… CHANG, … 2000-01-01       10.1… http://dx.doi.… Dataset         
+#>  2 Metha… T. Ditt… 2014-01-01       10.1… http://dx.doi.… Dataset         
+#>  3 anaer… jetten,… 2016-01-01       10.6… http://dx.doi.… Dataset         
+#>  4 Globa… Saunois… 2016-01-01       10.3… http://dx.doi.… Dataset         
+#>  5 Data … David F… 2017-01-01       10.5… http://dx.doi.… Dataset         
+#>  6 Metha… Susan M… 2015-01-01       10.1… http://dx.doi.… Dataset         
+#>  7 Metha… Susan M… 2017-01-01       10.1… http://dx.doi.… Dataset         
+#>  8 Light… Oswald,… 2015-01-01       10.1… http://dx.doi.… Collection      
+#>  9 Metha… Helge N… 2009-01-01       10.1… http://dx.doi.… Dataset         
+#> 10 Metha… Miriam … 2013-01-01       doi:… http://dx.doi.… Dataset         
+#> # ... with 4 more variables: Journal <chr>, Funder <chr>, `Project Name
+#> #   (GA Number)` <chr>, Access <chr>
 ```
 
 ### Get all the FP7-supported publications from a participating institution 
 
 
 ```r
-ugoe <- roa_projects(org = "UGOE")
-plyr::ldply(ugoe$grantID, roa_pubs) %>%
-  head()
-#>                                                                    Title
-#> 1                         DISTRIBUTION OF MASS OF HOLOMORPHIC CUSP FORMS
-#> 2                         On the Ramanujan conjecture over number fields
-#> 3         Exponential sums with coefficients of certain Dirichlet series
-#> 4                                 Automorphisms with exotic orbit growth
-#> 5              Subconvexity for sup-norms of automorphic forms on PGL(n)
-#> 6 Quadratic congruences on average and rational points on cubic surfaces
-#>                                                     Authors
-#> 1            Young, Matthew Khan, Rizwanur Blomer, Valentin
-#> 2                         Brumley, Farrell Blomer, Valentin
-#> 3                                            Baier, Stephan
-#> 4 Jaidee, Sawian Stevens, Shaun Ward, Thomas Baier, Stephan
-#> 5                               Maga, Péter Blomer, Valentin
-#> 6                          Baier, Stephan Derenthal, Ulrich
-#>   Publication.Year                          DOI
-#> 1       2013-01-01     10.1215/00127094-2380967
-#> 2       2011-01-01 10.4007/annals.2011.174.1.18
-#> 3       2012-01-01    10.1007/s00605-011-0372-7
-#> 4       2013-01-01            10.4064/aa158-2-5
-#> 5       2014-05-26                             
-#> 6       2012-05-02                             
-#>                             Permanent.identifier Publication.type
-#> 1 http://projecteuclid.org/euclid.dmj/1383760700          Article
-#> 2                 http://arxiv.org/abs/1003.0559          Article
-#> 3                 http://arxiv.org/abs/1108.2715          Article
-#> 4                 http://arxiv.org/abs/1201.4503          Article
-#> 5                 http://arxiv.org/abs/1405.6691          Article
-#> 6                 http://arxiv.org/abs/1205.0373          Article
-#>                                                               Journal
-#> 1                         Duke Math. J. 162, no. 14 (2013), 2609-2644
-#> 2                                                                    
-#> 3                                                                    
-#> 4 Acta arithmetica, 2013, Vol.158, pp.173-197 [Peer Reviewed Journal]
-#> 5                                                                    
-#> 6                                                                    
-#>   Project.Name..GA.Number. Access
-#> 1           ANTHOS(258713)   OPEN
-#> 2           ANTHOS(258713)   OPEN
-#> 3           ANTHOS(258713)   OPEN
-#> 4           ANTHOS(258713)   OPEN
-#> 5           ANTHOS(258713)   OPEN
-#> 6           ANTHOS(258713)   OPEN
+roa_projects(org = "UGOE", size = 10)
+#> # A tibble: 10 x 8
+#>    grantID acronym  title          startdate enddate callidentifier ecsc39
+#>    <chr>   <chr>    <chr>          <chr>     <chr>   <chr>          <chr> 
+#>  1 648329  GRANT    Groups, Repre… 2015-09-… 2020-0… ERC-2014-CoG   ""    
+#>  2 693457  Private… Private Pieti… 2016-10-… 2021-0… ERC-2015-AdG   ""    
+#>  3 707072  MARDIV   'Marriage and… 2016-09-… 2018-0… H2020-MSCA-IF… ""    
+#>  4 258713  ANTHOS   Analytic Numb… 2010-10-… 2015-0… ERC-2010-StG_… false 
+#>  5 771295  SULFOSOL Sulfur-based … 2018-05-… 2023-0… ERC-2017-COG   ""    
+#>  6 646747  N2FEED   N2 as Chemica… 2015-06-… 2020-0… ERC-2014-CoG   ""    
+#>  7 750249  AGG-RES… Let restore o… 2017-06-… 2019-0… H2020-MSCA-IF… ""    
+#>  8 639119  ULEED    Observing str… 2015-03-… 2020-0… ERC-2014-STG   ""    
+#>  9 752533  UCHIRAL  Ultrafast opt… 2017-07-… 2019-0… H2020-MSCA-IF… ""    
+#> 10 275542  MUSTERM… Music, Terror… 2011-06-… 2014-0… FP7-PEOPLE-20… false 
+#> # ... with 1 more variable: funding_level_0 <chr>
 ```
 
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/njahn82/ropenaire/issues).
 * License: MIT ©Najko Jahn
-
-
