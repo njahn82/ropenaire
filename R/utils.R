@@ -2,6 +2,10 @@
 oa_base <- function() "http://api.openaire.eu/"
 
 `%||%` <- function(x, y) if (is.null(x)) y else x
+`%|m|%` <- function(x, y) {
+  if (length(x) == 0) return(y)
+  if (is.null(x) || !nzchar(x)) y else x
+}
 
 comp <- function(x) Filter(Negate(is.null), x)
 

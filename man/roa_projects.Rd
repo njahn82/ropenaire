@@ -90,8 +90,6 @@ roa_projects(org = "UGOE", size = 3)
 roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
 roa_projects(title = "open", size = 3)
 
-roa_projects(dataset_id = "")
-
 # formats
 roa_projects(org = "UGOE", size = 3, format = "tsv")
 roa_projects(org = "UGOE", size = 3, format = "csv")
