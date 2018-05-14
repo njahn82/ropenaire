@@ -82,3 +82,6 @@ roa_projects(org = "UGOE", size = 10)
 
 * Please [report any issues or bugs](https://github.com/njahn82/ropenaire/issues).
 * License: MIT ©Najko Jahn
+
+[![okmaps_footer](tools/github-banner-okmaps-contribution.png)](https://openknowledgemaps.org/)
+

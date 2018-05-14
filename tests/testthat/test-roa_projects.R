@@ -8,7 +8,18 @@ test_that("roa_projects returns correct class", {
   expect_is(a, "data.frame")
   expect_is(a, "tbl_df")
   expect_is(a$grantID, "character")
-  expect_gt(NROW(a), 10) 
+  expect_named(a, c('grantID', 'acronym', 'title', 'startdate', 
+    'enddate', 'callidentifier', 'ecsc39', 'funding_level_0')) 
+})
+
+test_that("roa_projects works with eg that used to fail due to missing data", {
+  skip_on_cran()
+
+  a <- roa_projects(keywords = "open science", start_year = "2009")
+
+  expect_is(a, "data.frame")
+  expect_is(a, "tbl_df")
+  expect_gt(NROW(a), 0)
 })
 
 test_that("roa_projects fails well", {

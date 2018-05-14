@@ -28,8 +28,6 @@
 #' roa_projects(call_id = "FP7-PEOPLE-2010-IRSES")
 #' roa_projects(title = "open", size = 3)
 #' 
-#' roa_projects(dataset_id = "")
-#' 
 #' # formats
 #' roa_projects(org = "UGOE", size = 3, format = "tsv")
 #' roa_projects(org = "UGOE", size = 3, format = "csv")
@@ -68,14 +66,14 @@ roa_projects <- function(grant_id = NULL, publication_id = NULL,
 }
 
 xml_names <- c(
-  grantID = "//code",
-  acronym = "//acronym",
-  title = "//title",
-  startdate = "//startdate",
-  enddate = "//enddate",
-  callidentifier = "//callidentifier",
-  ecsc39 = "//ecsc39",
-  funding_level_0 = "//funding_level_0/name"
+  grantID = ".//code",
+  acronym = ".//acronym",
+  title = ".//title",
+  startdate = ".//startdate",
+  enddate = ".//enddate",
+  callidentifier = ".//callidentifier",
+  ecsc39 = ".//ecsc39",
+  funding_level_0 = ".//funding_level_0/name"
 )
 
 parse_project <- function(x) {
@@ -83,7 +81,7 @@ parse_project <- function(x) {
   results <- xml2::xml_find_all(x, xpath = '//results/result')
   lapply(results, function(z) {
     lapply(xml_names, function(w) {
-      xml2::xml_text(xml2::xml_find_all(z, w))
+      xml2::xml_text(xml2::xml_find_all(z, w)) %|m|% NA_character_
     })
   })
 }
