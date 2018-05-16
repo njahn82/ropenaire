@@ -2,6 +2,8 @@
 
 # ropenaire
 
+**Notice that ropenaire is currently improved for Open Knowledge Maps integration supported by [OpenAIRE](https://www.openaire.eu/). For the most current developement version, please follow this fork: <https://github.com/sckott/ropenaire>**
+
 [![Build Status](https://travis-ci.org/sckott/ropenaire.svg?branch=master)](https://travis-ci.org/sckott/ropenaire)
 [![Build status](https://ci.appveyor.com/api/projects/status/github/sckott/ropenaire?branch=master)](https://ci.appveyor.com/project/sckott/ropenaire)
 [![codecov.io](http://codecov.io/github/sckott/ropenaire/coverage.svg?branch=master)](http://codecov.io/github/sckott/ropenaire?branch=master)
@@ -16,6 +18,7 @@ For bulk access, please use the [OpenAIRE OAI-PMH endpoint](http://api.openaire.
 
 ## Installation from GitHub
 
+Get the most recent developement version from Scott
 
 ```r
 devtools::install_github("sckott/ropenaire")
